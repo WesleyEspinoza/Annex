@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SwiftySignatureVersionNumber;
-FOUNDATION_EXPORT const unsigned char SwiftySignatureVersionString[];
+FOUNDATION_EXPORT double SwiftSignatureViewVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftSignatureViewVersionString[];
 

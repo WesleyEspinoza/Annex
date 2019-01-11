@@ -146,13 +146,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SimplePDF/SimplePDF.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftySignature/SwiftySignature.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftSignatureView/SwiftSignatureView.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SimplePDF/SimplePDF.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftySignature/SwiftySignature.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftSignatureView/SwiftSignatureView.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

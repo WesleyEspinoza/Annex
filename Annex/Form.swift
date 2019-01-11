@@ -15,7 +15,8 @@ class Form {
     var lendee: String = ""
     var lendeeAddress: String = ""
     var amount: String = ""
-    var signature: Signature?
+    var lenderSignature: Signature?
+    var lendeeSignature: Signature?
     var creationDate: String = ""
     var dueDate: String = ""
     var State: String = ""
