@@ -10,12 +10,12 @@ import UIKit
 
 class MainViewController: UIViewController{
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        // Do any additional setup after loading the view, typically from a nib.
+    var forms = [Form]() {
+        didSet {
+            collectionView.reloadData()
+        }
     }
+    
     
     lazy var collectionView: UICollectionView = {
         // Instantiating the UICollectionView, using the default flow layout
@@ -38,6 +38,14 @@ class MainViewController: UIViewController{
         return collectionView
     }()
     
+    let navigationBar: UINavigationBar = {
+        let bar = UINavigationBar()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.barStyle = .blackTranslucent
+        bar.layer.cornerRadius = 15
+        return bar
+    }()
+    
     
     let addButton: UIButton = {
        let button = UIButton()
@@ -45,54 +53,78 @@ class MainViewController: UIViewController{
         button.setTitle("+", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = .white
+        button.layer.borderColor = UIColor.init(hexString: "#919191").cgColor
+        button.layer.borderWidth = 1
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
         button.layer.masksToBounds = false
         button.layer.shadowRadius = 5
         button.layer.shadowOpacity = 0.5
         button.layer.cornerRadius = 37.5
-        button.addTarget(self, action: #selector(addButtontapped), for: [.touchUpInside, .touchUpOutside])
-        button.addTarget(self, action: #selector(addButtontappedCancelled), for: .touchDown)
+        button.addTarget(self, action: #selector(addButtontapCancelled), for: [.touchCancel, .touchDragExit, .touchUpOutside])
+        button.addTarget(self, action: #selector(addButtontapUp), for: [.touchUpInside])
+        button.addTarget(self, action: #selector(addButtontapDown), for: [.touchDown])
         return button
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        
+            // Do any additional setup after loading the view, typically from a nib.
+        
+    }
     
     
     override func viewDidAppear(_ animated: Bool) {
         view.addSubview(collectionView)
         view.addSubview(addButton)
+        navigationController?.navigationBar.barTintColor = .white
+        navigationItem.title = "Annex"
         
         
         
-        NSLayoutConstraint.activate([addButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -25 ),
+        NSLayoutConstraint.activate([addButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -15 ),
                                      addButton.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: -35),
                                      addButton.widthAnchor.constraint(equalToConstant: 75),
                                      addButton.heightAnchor.constraint(equalToConstant: 75)])
     }
     
-    @objc func addButtontapped(_ sender: AnyObject) -> Void{
+    @objc func addButtontapUp(_ sender: AnyObject) -> Void{
+        addButton.alpha = 1
+        let nextVC = ContractCreationViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+        
+    }
+    @objc func addButtontapCancelled(_ sender: AnyObject) -> Void{
         addButton.alpha = 1
     }
-    @objc func addButtontappedCancelled(_ sender: AnyObject) -> Void{
+    @objc func addButtontapDown(_ sender: AnyObject) -> Void{
         addButton.alpha = 0.5
+        
+        
     }
-    
-    
-    
-
-
 }
 
 extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return forms.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.identifier, for: indexPath) as! Cell
+        let row = indexPath.row
+        let form = forms[row]
+        cell.nameLable.text = ("\(form.lendee)'s Constract")
+        cell.moneyLabel.text = form.amount
+        cell.creationDateLable.text = form.creationDate
+        cell.dueDateLable.text = form.dueDate
         return cell
     }
 }

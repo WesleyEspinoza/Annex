@@ -1,0 +1,30 @@
+PODS:
+  - Realm (3.11.0):
+    - Realm/Headers (= 3.11.0)
+  - Realm/Headers (3.11.0)
+  - RealmSwift (3.11.0):
+    - Realm (= 3.11.0)
+  - SimplePDF (3.0.0)
+  - SwiftySignature (1.0.0)
+
+DEPENDENCIES:
+  - RealmSwift
+  - SimplePDF
+  - SwiftySignature
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Realm
+    - RealmSwift
+    - SimplePDF
+    - SwiftySignature
+
+SPEC CHECKSUMS:
+  Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
+  RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
+  SimplePDF: 903143ede36965886997a5c1bc6b8940b082ba20
+  SwiftySignature: 5f5905fcad18659e53e7c01ed467cfe00ea6127c
+
+PODFILE CHECKSUM: 0c4f18f603d56d728c1957f919fed47d245b2cfc
+
+COCOAPODS: 1.5.3

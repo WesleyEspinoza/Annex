@@ -1,0 +1,6 @@
+framework module SwiftySignature {
+  umbrella header "SwiftySignature-umbrella.h"
+
+  export *
+  module * { export * }
+}

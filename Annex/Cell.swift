@@ -9,27 +9,96 @@
 import UIKit
 
 class Cell: UICollectionViewCell {
-    let colorArr:[String] = ["#35CDD8","#A5B557","#354E71"]
+    let colorArr:[String] = ["#ff5432","#ff8731","#49ff30"]
     
     static var identifier: String = "Cell"
     
-    var buttonLabel: UILabel!
+    var nameLable: UILabel = {
+        let lable = UILabel(frame: .zero)
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.text = "John Doe's Contract"
+        lable.font = UIFont.boldSystemFont(ofSize: 20)
+        return lable
+    }()
+    
+    
+    let moneyLabel: UILabel = {
+       let lable = UILabel(frame: .zero)
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.text = "$45.00"
+        lable.font = UIFont.systemFont(ofSize: 20)
+        return lable
+    }()
+    
+    let uniqueIdLable: UILabel = {
+       let lable = UILabel(frame: .zero)
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.text = "Unique ID: 8639-5838-2937"
+        return lable
+    }()
+    
+    
+    let creationDateLable: UILabel = {
+       let lable = UILabel(frame: .zero)
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.text = "Creation Date: 01/09/2019"
+        lable.font = UIFont.systemFont(ofSize: 16)
+        return lable
+    }()
+    
+    let dueDateLable: UILabel = {
+        let lable = UILabel(frame: .zero)
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.text = "Due Date: 01/19/2019"
+        lable.font = UIFont.systemFont(ofSize: 16)
+        return lable
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.contentView.addSubview(nameLable)
+        self.contentView.addSubview(moneyLabel)
+        self.contentView.addSubview(creationDateLable)
+        self.contentView.addSubview(dueDateLable)
+        
+        self.layer.borderColor = UIColor.init(hexString: "#919191").cgColor
+        self.layer.borderWidth = 1
+        
         
         // Layout views inside the cell
         
-        let nameLable = UILabel(frame: .zero)
-        nameLable.translatesAutoresizingMaskIntoConstraints = false
+        let arrowLable = UILabel(frame: .zero)
+        arrowLable.translatesAutoresizingMaskIntoConstraints = false
+        arrowLable.text = "〉"
+        arrowLable.font = UIFont.systemFont(ofSize: 35)
+        self.contentView.addSubview(arrowLable)
         
-        self.contentView.addSubview(nameLable)
+        
+        
         
         // Aplying constraints
-        NSLayoutConstraint.activate([
-            self.contentView.centerXAnchor.constraint(equalTo: nameLable.centerXAnchor),
-            self.contentView.centerYAnchor.constraint(equalTo: nameLable.centerYAnchor),
+        NSLayoutConstraint.activate([ nameLable.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
+                                      nameLable.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+                                      
+                                      
+                                      moneyLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+                                      moneyLabel.topAnchor.constraint(equalTo: nameLable.topAnchor, constant: 0),
+                                      
+                                      
+                                      creationDateLable.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 8),
+                                      creationDateLable.leadingAnchor.constraint(equalTo: nameLable.leadingAnchor, constant: 0),
+                                      
+                                      
+                                      dueDateLable.leadingAnchor.constraint(equalTo: creationDateLable.leadingAnchor, constant: 0),
+                                      dueDateLable.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+                                      
+                                      
+                                      arrowLable.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
+                                      arrowLable.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -5)
+                                      
+            
             ])
         
         // Customization
