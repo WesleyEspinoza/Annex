@@ -746,11 +746,10 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
             }
         }
         
-        form.lenderSignature = lenderSignatureView.signature
-        form.lendeeSignature = lendeeSignatureView.signature
+       
         
         self.dismiss(animated: true) {
-            MainViewController.forms.append(form)
+            RealmHelper.addForm(form: form)
         }
     }
     

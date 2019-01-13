@@ -16,6 +16,8 @@
 		2B4D14CC21E714ED00C21358 /* ContractCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14CB21E714ED00C21358 /* ContractCreationViewController.swift */; };
 		2B4D14D221E8309D00C21358 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14D121E8309D00C21358 /* Form.swift */; };
 		2B4D14D421E8587400C21358 /* ContractDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14D321E8587400C21358 /* ContractDisplayController.swift */; };
+		2B4D14DA21EBB78900C21358 /* realmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14D921EBB78900C21358 /* realmHelper.swift */; };
+		2B4D14DC21EBBBC400C21358 /* YPDrawSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14DB21EBBBC400C21358 /* YPDrawSignatureView.swift */; };
 		C058C1E3AD10F3BF55229B10 /* Pods_Annex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6861BD14C50EE9AC22B5568 /* Pods_Annex.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		2B4D14CB21E714ED00C21358 /* ContractCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCreationViewController.swift; sourceTree = "<group>"; };
 		2B4D14D121E8309D00C21358 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		2B4D14D321E8587400C21358 /* ContractDisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractDisplayController.swift; sourceTree = "<group>"; };
+		2B4D14D921EBB78900C21358 /* realmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = realmHelper.swift; sourceTree = "<group>"; };
+		2B4D14DB21EBBBC400C21358 /* YPDrawSignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YPDrawSignatureView.swift; sourceTree = "<group>"; };
 		D6861BD14C50EE9AC22B5568 /* Pods_Annex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Annex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F189BDA059275B4516679010 /* Pods-Annex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Annex.release.xcconfig"; path = "Pods/Target Support Files/Pods-Annex/Pods-Annex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +83,8 @@
 				2B4D14B021E52A4800C21358 /* LaunchScreen.storyboard */,
 				2B4D14B321E52A4800C21358 /* Info.plist */,
 				2B4D14D121E8309D00C21358 /* Form.swift */,
+				2B4D14DB21EBBBC400C21358 /* YPDrawSignatureView.swift */,
+				2B4D14D921EBB78900C21358 /* realmHelper.swift */,
 			);
 			path = Annex;
 			sourceTree = "<group>";
@@ -227,9 +233,11 @@
 			files = (
 				2B4D14AA21E52A4800C21358 /* MainViewController.swift in Sources */,
 				2B4D14CA21E66B2F00C21358 /* Cell.swift in Sources */,
+				2B4D14DC21EBBBC400C21358 /* YPDrawSignatureView.swift in Sources */,
 				2B4D14D421E8587400C21358 /* ContractDisplayController.swift in Sources */,
 				2B4D14A821E52A4800C21358 /* AppDelegate.swift in Sources */,
 				2B4D14CC21E714ED00C21358 /* ContractCreationViewController.swift in Sources */,
+				2B4D14DA21EBB78900C21358 /* realmHelper.swift in Sources */,
 				2B4D14C021E5545100C21358 /* customFlowLayout.swift in Sources */,
 				2B4D14D221E8309D00C21358 /* Form.swift in Sources */,
 			);

@@ -8,16 +8,16 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
-class Form {
-    var lender: String = ""
-    var lenderAddress: String = ""
-    var lendee: String = ""
-    var lendeeAddress: String = ""
-    var amount: String = ""
-    var lenderSignature: UIImage?
-    var lendeeSignature: UIImage?
-    var creationDate: String = ""
-    var dueDate: String = ""
-    var State: String = ""
+class Form: Object{
+    @objc dynamic var lender: String = ""
+    @objc dynamic var lenderAddress: String = ""
+    @objc dynamic var lendee: String = ""
+    @objc dynamic var lendeeAddress: String = ""
+    @objc dynamic var amount: String = ""
+
+    @objc dynamic var creationDate: String = ""
+    @objc dynamic var dueDate: String = ""
+    @objc dynamic var State: String = ""
 }

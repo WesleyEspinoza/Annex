@@ -13,26 +13,29 @@ import RealmSwift
 
 class ContractDisplayController: UIViewController {
     
-    var amount: String?
-    var date: String?
-    var lenderName: String?
-    var lendeeName: String?
-    var dueDate: String?
-    var state: String?
-    var lenderAddress: String?
-    var lendeeAddress: String?
+    var amount: String = ""
+    var date: String = ""
+    var lenderName: String = ""
+    var lendeeName: String = ""
+    var dueDate: String = ""
+    var state: String = ""
+    var lenderAddress: String = ""
+    var lendeeAddress: String = ""
+    var lenderSignature: UIImage?
+    var lendeeSignature: UIImage?
     
     let textView:UITextView = {
         let view = UITextView()
-        view.isUserInteractionEnabled = false
         view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isEditable = false
         return view
     }()
     
     
     override func viewDidLoad() {
         let loan: String = """
-                                                            LOAN AGREEMENT
+                                                    LOAN AGREEMENT
   
   
         \(String(describing: amount))                                                                                     Date: \(String(describing: date))
@@ -124,6 +127,7 @@ By:____________________________________________________
 """
         
         view.addSubview(textView)
+        view.backgroundColor = .white
         
         NSLayoutConstraint.activate([
                                      textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),

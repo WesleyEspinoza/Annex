@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController{
-     static var forms = [Form]()
+    var forms: Results<Form>! {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     lazy var collectionView: UICollectionView = {
         // Instantiating the UICollectionView, using the default flow layout
@@ -62,10 +67,12 @@ class MainViewController: UIViewController{
         return button
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(false, animated: true)
+        forms = RealmHelper.retrieveForm()
         
         
             // Do any additional setup after loading the view, typically from a nib.
@@ -108,15 +115,14 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return MainViewController.forms.count
+        return forms.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.identifier, for: indexPath) as! Cell
-        let row = indexPath.row
-        let form = MainViewController.forms[row]
-        cell.nameLable.text = ("\(form.lendee)'s Constract \(row)")
+        let form = forms[indexPath.row]
+        cell.nameLable.text = ("\(form.lendee)'s Constract")
         cell.moneyLabel.text = "\(form.amount)"
         cell.creationDateLable.text = "\(form.creationDate)"
         cell.dueDateLable.text = "\(form.dueDate)"
@@ -128,7 +134,7 @@ extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let nextViewController = ContractDisplayController()
-        let form = MainViewController.forms[indexPath.row]
+        let form = forms[indexPath.row]
         nextViewController.lenderAddress = form.lenderAddress
         nextViewController.lendeeAddress = form.lendeeAddress
         nextViewController.dueDate = form.dueDate
@@ -137,7 +143,7 @@ extension MainViewController: UICollectionViewDelegate {
         nextViewController.lenderName = form.lender
         nextViewController.lendeeName = form.lendee
         nextViewController.state = form.State
-        navigationController?.present(nextViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(nextViewController, animated: true)
     }
     
 }
