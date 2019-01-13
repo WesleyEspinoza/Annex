@@ -16,8 +16,13 @@ class Form: Object{
     @objc dynamic var lendee: String = ""
     @objc dynamic var lendeeAddress: String = ""
     @objc dynamic var amount: String = ""
-
+    @objc dynamic var lenderSignatureData: Data?
+    @objc dynamic var lendeeSignatureData: Data?
     @objc dynamic var creationDate: String = ""
     @objc dynamic var dueDate: String = ""
-    @objc dynamic var State: String = ""
+    @objc dynamic var day: String = ""
+    @objc dynamic var month: String = ""
+    @objc dynamic var year: String = ""
+    @objc dynamic var state: String = ""
+    @objc dynamic var city: String = ""
 }

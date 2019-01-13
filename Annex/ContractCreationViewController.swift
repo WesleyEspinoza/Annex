@@ -688,9 +688,18 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         for view in dueDateView.subviews {
             if let datePicker = view as? UIDatePicker {
                 let dateFormatter = DateFormatter()
+                let monthFormatter = DateFormatter()
+                let dayFormatter = DateFormatter()
+                let yearFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMMM d, yyyy"
+                monthFormatter.dateFormat = "MMMM"
+                dayFormatter.dateFormat = "d"
+                yearFormatter.dateFormat = "yyyy"
                 let strDate = dateFormatter.string(from: datePicker.date)
                 let curDate = dateFormatter.string(from: NSDate() as Date)
+                form.month = monthFormatter.string(from: datePicker.date)
+                form.day = dayFormatter.string(from: datePicker.date)
+                form.year = yearFormatter.string(from: datePicker.date)
                 form.dueDate = strDate
                 form.creationDate = curDate
             }
@@ -737,6 +746,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
             }
             if let textField1 = self.lendeeAddressView.viewWithTag(1) as? UITextField {
                 form.lendeeAddress = ("\(form.lendeeAddress), \(textField1.text ?? "") ")
+                form.city = textField1.text ?? ""
             }
             if let textField2 = self.lendeeAddressView.viewWithTag(2) as? UITextField {
                 form.lendeeAddress = ("\(form.lendeeAddress), \(textField2.text ?? "") ")
@@ -746,7 +756,8 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
             }
         }
         
-       
+        form.lenderSignatureData =  lenderSignatureView.signature!.pngData()!
+        form.lendeeSignatureData =  lendeeSignatureView.signature!.pngData()!
         
         self.dismiss(animated: true) {
             RealmHelper.addForm(form: form)
