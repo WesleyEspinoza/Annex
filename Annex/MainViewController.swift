@@ -9,13 +9,7 @@
 import UIKit
 
 class MainViewController: UIViewController{
-    
-    var forms = [Form]() {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    
+     static var forms = [Form]()
     
     lazy var collectionView: UICollectionView = {
         // Instantiating the UICollectionView, using the default flow layout
@@ -80,6 +74,7 @@ class MainViewController: UIViewController{
     
     
     override func viewDidAppear(_ animated: Bool) {
+        collectionView.reloadData()
         view.addSubview(collectionView)
         view.addSubview(addButton)
         navigationController?.navigationBar.barTintColor = .white
@@ -96,7 +91,7 @@ class MainViewController: UIViewController{
     @objc func addButtontapUp(_ sender: AnyObject) -> Void{
         addButton.alpha = 1
         let nextVC = ContractCreationViewController()
-        navigationController?.pushViewController(nextVC, animated: true)
+        navigationController?.present(nextVC, animated: true, completion: nil)
         
     }
     @objc func addButtontapCancelled(_ sender: AnyObject) -> Void{
@@ -113,18 +108,18 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return forms.count
+        return MainViewController.forms.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.identifier, for: indexPath) as! Cell
         let row = indexPath.row
-        let form = forms[row]
-        cell.nameLable.text = ("\(form.lendee)'s Constract")
-        cell.moneyLabel.text = form.amount
-        cell.creationDateLable.text = form.creationDate
-        cell.dueDateLable.text = form.dueDate
+        let form = MainViewController.forms[row]
+        cell.nameLable.text = ("\(form.lendee)'s Constract \(row)")
+        cell.moneyLabel.text = "\(form.amount)"
+        cell.creationDateLable.text = "\(form.creationDate)"
+        cell.dueDateLable.text = "\(form.dueDate)"
         return cell
     }
 }
@@ -132,7 +127,17 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let nextViewController = ContractDisplayController()
+        let form = MainViewController.forms[indexPath.row]
+        nextViewController.lenderAddress = form.lenderAddress
+        nextViewController.lendeeAddress = form.lendeeAddress
+        nextViewController.dueDate = form.dueDate
+        nextViewController.date = form.creationDate
+        nextViewController.amount = form.amount
+        nextViewController.lenderName = form.lender
+        nextViewController.lendeeName = form.lendee
+        nextViewController.state = form.State
+        navigationController?.present(nextViewController, animated: true, completion: nil)
     }
     
 }
@@ -171,4 +176,17 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
+
+
+extension UIViewController{
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
 

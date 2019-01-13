@@ -84,7 +84,7 @@ class Cell: UICollectionViewCell {
                                       
                                       
                                       moneyLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -50),
-                                      moneyLabel.topAnchor.constraint(equalTo: nameLable.topAnchor, constant: 0),
+                                      moneyLabel.topAnchor.constraint(equalTo: nameLable.topAnchor, constant: 25),
                                       
                                       
                                       creationDateLable.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 8),

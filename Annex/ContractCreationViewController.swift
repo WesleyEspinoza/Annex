@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 import SimplePDF
 import RealmSwift
-import SwiftySignature
+import SwiftSignatureView
 
 class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
     
+    
     var counter: Int = 0
-    let form = Form()
     var offSet: Double = 22.5
     let viewH: CGFloat = 250
     let viewW: CGFloat = 300
@@ -38,6 +38,84 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         return control
     }()
     
+    
+    let amountView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 15
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowRadius = 5
+        view.layer.shadowOffset = CGSize(width: 0, height: 5)
+        view.backgroundColor = UIColor.init(hexString: "#72a8ff")
+        
+        let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.text = "How much money is being lent?"
+        
+        let textBox = UITextField()
+        textBox.translatesAutoresizingMaskIntoConstraints = false
+        textBox.keyboardType = .numbersAndPunctuation
+        
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .black
+        
+        view.addSubview(lable)
+        view.addSubview(textBox)
+        view.addSubview(line)
+        NSLayoutConstraint.activate([lable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+                                     lable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -25),
+                                     
+                                     
+                                     textBox.topAnchor.constraint(equalTo: lable.bottomAnchor, constant: 25),
+                                     textBox.centerXAnchor.constraint(equalTo: lable.centerXAnchor, constant: 0),
+                                     textBox.heightAnchor.constraint(equalToConstant: 25),
+                                     textBox.widthAnchor.constraint(equalToConstant: 200),
+                                     
+                                     
+                                     line.leadingAnchor.constraint(equalTo: textBox.leadingAnchor, constant: 0),
+                                     line.trailingAnchor.constraint(equalTo: textBox.trailingAnchor, constant: 0),
+                                     line.topAnchor.constraint(equalTo: textBox.bottomAnchor, constant: 0),
+                                     line.heightAnchor.constraint(equalToConstant: 1)])
+    
+        return view
+    }()
+    
+    
+    let dueDateView: UIView = {
+        let view = UIView()
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 15
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 15
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowRadius = 5
+        view.layer.shadowOffset = CGSize(width: 0, height: 5)
+        view.backgroundColor = UIColor.init(hexString: "#72a8ff")
+        
+        
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.layer.masksToBounds = true
+        datePicker.layer.cornerRadius = 15
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.layer.cornerRadius = 15
+        datePicker.layer.shadowOpacity = 0.5
+        datePicker.layer.shadowRadius = 5
+        datePicker.layer.shadowOffset = CGSize(width: 0, height: 5)
+        datePicker.backgroundColor = UIColor.init(hexString: "#72a8ff")
+        
+        view.addSubview(datePicker)
+        
+        NSLayoutConstraint.activate([datePicker.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+                                     datePicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+                                     datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10),
+                                     datePicker.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10)
+                                     ])
+        
+        return view
+    }()
+    
     let lenderView: UIView = {
        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +127,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
-        lable.text = "Who is Leding the money?"
+        lable.text = "Who is Lending the money?"
         
         let textBox = UITextField()
         textBox.translatesAutoresizingMaskIntoConstraints = false
@@ -82,6 +160,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
     
     let lenderAddressView: UIView = {
         let view = UIView()
+        view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 15
         view.layer.shadowOpacity = 0.5
@@ -96,23 +175,19 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         let addresstTextBox = UITextField()
         addresstTextBox.translatesAutoresizingMaskIntoConstraints = false
         addresstTextBox.placeholder = "Address"
-        addresstTextBox.tag = 0
         
         let citytTextBox = UITextField()
         citytTextBox.translatesAutoresizingMaskIntoConstraints = false
         citytTextBox.placeholder = "City"
-        citytTextBox.tag = 1
         
         let zipCodeTextBox = UITextField()
         zipCodeTextBox.translatesAutoresizingMaskIntoConstraints = false
         zipCodeTextBox.placeholder = "Zip Code"
         zipCodeTextBox.keyboardType = .numberPad
-        zipCodeTextBox.tag = 3
         
         let stateTextBox = UITextField()
         stateTextBox.translatesAutoresizingMaskIntoConstraints = false
         stateTextBox.placeholder = "State"
-        stateTextBox.tag = 4
         
         let line = UIView()
         line.translatesAutoresizingMaskIntoConstraints = false
@@ -127,8 +202,8 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         line3.translatesAutoresizingMaskIntoConstraints = false
         line3.backgroundColor = .black
         let line4 = UIView()
-        line3.translatesAutoresizingMaskIntoConstraints = false
-        line3.backgroundColor = .black
+        line4.translatesAutoresizingMaskIntoConstraints = false
+        line4.backgroundColor = .black
         
         view.addSubview(lable)
         view.addSubview(addresstTextBox)
@@ -191,7 +266,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
                                      line4.trailingAnchor.constraint(equalTo: zipCodeTextBox.trailingAnchor, constant: 0),
                                      line4.topAnchor.constraint(equalTo: zipCodeTextBox.bottomAnchor, constant: 0),
                                      line4.heightAnchor.constraint(equalToConstant: 1)
-                                     ])
+            ])
         
         return view
     }()
@@ -201,6 +276,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
     
     let lendeeAddressView: UIView = {
         let view = UIView()
+        view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 15
         view.layer.shadowOpacity = 0.5
@@ -242,8 +318,8 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         line3.translatesAutoresizingMaskIntoConstraints = false
         line3.backgroundColor = .black
         let line4 = UIView()
-        line3.translatesAutoresizingMaskIntoConstraints = false
-        line3.backgroundColor = .black
+        line4.translatesAutoresizingMaskIntoConstraints = false
+        line4.backgroundColor = .black
         
         view.addSubview(lable)
         view.addSubview(addresstTextBox)
@@ -356,64 +432,22 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
     }()
     
     
-    
-    let moneyDueView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 15
-        view.layer.shadowOpacity = 0.5
-        view.layer.shadowRadius = 5
-        view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.backgroundColor = UIColor.init(hexString: "#72a8ff")
-        
-        let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        lable.text = "when is the money Due?"
-        
-        let textBox = UITextField()
-        textBox.translatesAutoresizingMaskIntoConstraints = false
-        textBox.placeholder = "12/12/2019"
-        
-        let line = UIView()
-        line.translatesAutoresizingMaskIntoConstraints = false
-        line.backgroundColor = .black
-        
-        view.addSubview(lable)
-        view.addSubview(textBox)
-        view.addSubview(line)
-        NSLayoutConstraint.activate([lable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-                                     lable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -25),
-                                     
-                                     
-                                     textBox.topAnchor.constraint(equalTo: lable.bottomAnchor, constant: 25),
-                                     textBox.centerXAnchor.constraint(equalTo: lable.centerXAnchor, constant: 0),
-                                     textBox.heightAnchor.constraint(equalToConstant: 25),
-                                     textBox.widthAnchor.constraint(equalToConstant: 200),
-                                     
-                                     
-                                     line.leadingAnchor.constraint(equalTo: textBox.leadingAnchor, constant: 0),
-                                     line.trailingAnchor.constraint(equalTo: textBox.trailingAnchor, constant: 0),
-                                     line.topAnchor.constraint(equalTo: textBox.bottomAnchor, constant: 0),
-                                     line.heightAnchor.constraint(equalToConstant: 0)])
-        
-        
-        return view
-    }()
-    
-    
-    let lenderSignatureView: SignatureView = {
-       let view = SignatureView()
+    let lenderSignatureView: SwiftSignatureView = {
+       let view = SwiftSignatureView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.init(hexString: "#919191").cgColor
+        view.maximumStrokeWidth = 12
+        view.backgroundColor = .white
         return view
     }()
     
-    let lendeeSignatureView: SignatureView = {
-        let view = SignatureView()
+    let lendeeSignatureView: SwiftSignatureView = {
+        let view = SwiftSignatureView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.init(hexString: "#919191").cgColor
+        view.backgroundColor = .white
         return view
     }()
     
@@ -471,22 +505,46 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         return button
     }()
     
+    let saveButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("save", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.borderColor = UIColor.init(hexString: "#919191").cgColor
+        button.layer.borderWidth = 1
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
+        button.layer.masksToBounds = false
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.5
+        button.layer.cornerRadius = 15
+        button.addTarget(self, action: #selector(saveButtontapCancelled), for: [.touchCancel, .touchDragExit, .touchUpOutside])
+        button.addTarget(self, action: #selector(saveButtontapUp), for: [.touchUpInside])
+        button.addTarget(self, action: #selector(saveButtontapDown), for: [.touchDown])
+        return button
+    }()
+    
     
     
     
     
     override func viewDidLoad() {
+        hideKeyboardWhenTappedAround()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         view.backgroundColor = .white
         scrollView.delegate = self
         
         view.addSubview(scrollView)
         view.addSubview(nextButton)
         view.addSubview(backButton)
+        scrollView.addSubview(saveButton)
         scrollView.backgroundColor = .white
-        let width = (view.bounds.width * 6)
-        scrollView.contentSize = CGSize(width:width, height: 1)
         pageControl.currentPage = 0
         
+        scrollView.addSubview(amountView)
+        scrollView.addSubview(dueDateView)
         scrollView.addSubview(lenderView)
         scrollView.addSubview(lenderAddressView)
         scrollView.addSubview(lendeeView)
@@ -495,6 +553,12 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(lendeeSignatureView)
         scrollView.addSubview(lenderSignatureLabel)
         scrollView.addSubview(lendeeSignatureLabel)
+        
+        let totalViews = scrollView.subviews.count - 2
+        let viewWidth = view.bounds.width
+        
+        let width = viewWidth * CGFloat(totalViews)
+        scrollView.contentSize = CGSize(width:width, height: 1)
         
         NSLayoutConstraint.activate([scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
                                      scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
@@ -513,15 +577,28 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
                                      
                                      
                                      
+                                     amountView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
+                                     amountView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+                                     amountView.heightAnchor.constraint(equalToConstant: viewH),
+                                     amountView.widthAnchor.constraint(equalToConstant: viewW),
+                                     
+                                     
+                                     dueDateView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
+                                     dueDateView.leadingAnchor.constraint(equalTo: amountView.trailingAnchor, constant: 75),
+                                     dueDateView.heightAnchor.constraint(equalToConstant: viewH),
+                                     dueDateView.widthAnchor.constraint(equalToConstant: viewW),
+                                     
+                                     
+                                     
                                      lenderView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     lenderView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+                                     lenderView.leadingAnchor.constraint(equalTo: dueDateView.trailingAnchor, constant: 75),
                                      lenderView.heightAnchor.constraint(equalToConstant: viewH),
                                      lenderView.widthAnchor.constraint(equalToConstant: viewW),
                                      
                                      
                                      lenderAddressView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
                                      lenderAddressView.leadingAnchor.constraint(equalTo: lenderView.trailingAnchor, constant: 75),
-                                     lenderAddressView.heightAnchor.constraint(equalToConstant: viewH + 75),
+                                     lenderAddressView.heightAnchor.constraint(equalToConstant: viewH + 150),
                                      lenderAddressView.widthAnchor.constraint(equalToConstant: viewW),
                                      
                                      
@@ -533,7 +610,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
                                      
                                      lendeeAddressView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
                                      lendeeAddressView.leadingAnchor.constraint(equalTo: lendeeView.trailingAnchor, constant: 75),
-                                     lendeeAddressView.heightAnchor.constraint(equalToConstant: viewH + 75),
+                                     lendeeAddressView.heightAnchor.constraint(equalToConstant: viewH + 150),
                                      lendeeAddressView.widthAnchor.constraint(equalToConstant: viewW),
                                      
                                      
@@ -551,7 +628,13 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
                                      lendeeSignatureView.widthAnchor.constraint(equalToConstant: viewW),
                                      
                                      lendeeSignatureLabel.bottomAnchor.constraint(equalTo: lendeeSignatureView.topAnchor, constant: -1),
-                                     lendeeSignatureLabel.centerXAnchor.constraint(equalTo: lendeeSignatureView.centerXAnchor)
+                                     lendeeSignatureLabel.centerXAnchor.constraint(equalTo: lendeeSignatureView.centerXAnchor),
+                                     
+                                     
+                                     saveButton.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
+                                     saveButton.leadingAnchor.constraint(equalTo: lendeeSignatureView.trailingAnchor, constant: 75),
+                                     saveButton.heightAnchor.constraint(equalToConstant: viewH),
+                                     saveButton.widthAnchor.constraint(equalToConstant: viewW),
                                      ])
         
         
@@ -568,64 +651,6 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         let slideToX = contentOffset + pageWidth
         nextButton.isUserInteractionEnabled = false
         self.scrollView.scrollRectToVisible(CGRect(x:slideToX, y:0, width:pageWidth, height:self.scrollView.frame.height), animated: true)
-        let form = Form()
-        switch pageControl.currentPage {
-        case 0:
-            for view in lenderView.subviews{
-                if let textField = view as? UITextField {
-                    form.lender = textField.text ?? "John Doe"
-                }
-            }
-        case 1:
-            
-            
-            for _ in lenderAddressView.subviews{
-                if let txtField0 = self.view.viewWithTag(0) as? UITextField {
-                    print(txtField0.text!)
-                }
-                if let txtField0 = self.view.viewWithTag(0) as? UITextField {
-                    print(txtField0.text!)
-                }
-                if let txtField0 = self.view.viewWithTag(0) as? UITextField {
-                    print(txtField0.text!)
-                }
-                if let txtField0 = self.view.viewWithTag(0) as? UITextField {
-                    print(txtField0.text!)
-                }
-            }
-
-        case 2:
-            for view in lenderView.subviews{
-                if let textField = view as? UITextField {
-                    form.lendee = textField.text ?? "Mark Doe"
-                }
-            }
-            
-        case 3:
-            for _ in lenderAddressView.subviews{
-                if let txtField0 = self.view.viewWithTag(0) as? UITextField {
-                    print(txtField0.text!)
-                }
-                if let txtField0 = self.view.viewWithTag(0) as? UITextField {
-                    print(txtField0.text!)
-                }
-                if let txtField0 = self.view.viewWithTag(0) as? UITextField {
-                    print(txtField0.text!)
-                }
-                if let txtField0 = self.view.viewWithTag(0) as? UITextField {
-                    print(txtField0.text!)
-                }
-            }
-        case 4:
-            lenderSignatureView.captureSignature()
-            lenderSignatureView.clearCanvas()
-            
-        default:
-            if (pageControl.currentPage > 6) {
-                pageControl.currentPage = 6
-            }
-        }
-        pageControl.currentPage += 1
         
     }
     @objc func nextButtontapCancelled(_ sender: AnyObject) -> Void{
@@ -638,7 +663,6 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
     @objc func backButtontapUp(_ sender: AnyObject) -> Void{
         backButton.alpha = 1
         
-        pageControl.currentPage -= 1
         
         let pageWidth:CGFloat = self.scrollView.frame.width
         let contentOffset:CGFloat = self.scrollView.contentOffset.x
@@ -657,9 +681,105 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
     }
     
     
+    @objc func saveButtontapUp(_ sender: AnyObject) -> Void{
+        backButton.alpha = 1
+        let form = Form()
+        
+        for view in dueDateView.subviews {
+            if let datePicker = view as? UIDatePicker {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMMM d, yyyy"
+                let strDate = dateFormatter.string(from: datePicker.date)
+                let curDate = dateFormatter.string(from: NSDate() as Date)
+                form.dueDate = strDate
+                form.creationDate = curDate
+            }
+            
+        }
+        
+        
+        for view in amountView.subviews {
+            if let textField = view as? UITextField {
+                form.amount = textField.text ?? ""
+            }
+        }
+        
+        for view in lenderView.subviews {
+            if let textField = view as? UITextField {
+                form.lender = textField.text ?? ""
+            }
+            
+        }
+        
+        for view in lendeeView.subviews {
+            if let textField = view as? UITextField {
+                form.lendee = textField.text ?? ""
+            }
+        }
+        for _ in lenderAddressView.subviews {
+            if let textField0 = self.lenderAddressView.viewWithTag(0) as? UITextField {
+                form.lenderAddress = textField0.text ?? ""
+            }
+            if let textField1 = self.lenderAddressView.viewWithTag(1) as? UITextField {
+                form.lenderAddress = ("\(form.lenderAddress), \(textField1.text ?? "") ")
+            }
+            if let textField2 = self.lenderAddressView.viewWithTag(2) as? UITextField {
+                form.lenderAddress = ("\(form.lenderAddress), \(textField2.text ?? "") ")
+            }
+            if let textField3 = self.lenderAddressView.viewWithTag(3) as? UITextField {
+                form.lenderAddress = ("\(form.lenderAddress), \(textField3.text ?? "") ")
+            }
+        }
+        
+        for _ in lendeeAddressView.subviews {
+            if let textField0 = self.lendeeAddressView.viewWithTag(0) as? UITextField {
+                form.lendeeAddress = textField0.text ?? ""
+            }
+            if let textField1 = self.lendeeAddressView.viewWithTag(1) as? UITextField {
+                form.lendeeAddress = ("\(form.lendeeAddress), \(textField1.text ?? "") ")
+            }
+            if let textField2 = self.lendeeAddressView.viewWithTag(2) as? UITextField {
+                form.lendeeAddress = ("\(form.lendeeAddress), \(textField2.text ?? "") ")
+            }
+            if let textField3 = self.lendeeAddressView.viewWithTag(3) as? UITextField {
+                form.lendeeAddress = ("\(form.lendeeAddress), \(textField3.text ?? "") ")
+            }
+        }
+        
+        form.lenderSignature = lenderSignatureView.signature
+        form.lendeeSignature = lendeeSignatureView.signature
+        
+        self.dismiss(animated: true) {
+            MainViewController.forms.append(form)
+        }
+    }
+    
+    @objc func saveButtontapCancelled(_ sender: AnyObject) -> Void{
+        backButton.alpha = 1
+    }
+    @objc func saveButtontapDown(_ sender: AnyObject) -> Void{
+        backButton.alpha = 0.5
+    }
+    
+    
      func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         nextButton.isUserInteractionEnabled = true
         backButton.isUserInteractionEnabled = true
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification){
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height - 225
+            }
+        }
+        
+    }
+    
+    @objc func keyboardWillHide(){
+        self.view.frame.origin.y = 0
+        
     }
     
 }

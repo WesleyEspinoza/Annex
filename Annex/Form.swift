@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftySignature
+import UIKit
 
 class Form {
     var lender: String = ""
@@ -15,8 +15,8 @@ class Form {
     var lendee: String = ""
     var lendeeAddress: String = ""
     var amount: String = ""
-    var lenderSignature: Signature?
-    var lendeeSignature: Signature?
+    var lenderSignature: UIImage?
+    var lendeeSignature: UIImage?
     var creationDate: String = ""
     var dueDate: String = ""
     var State: String = ""
