@@ -31,6 +31,8 @@ class ContractDisplayController: UIViewController {
     var lenderSignature: UIImage?
     var lendeeSignature: UIImage?
     let legalPaperSize = CGSize(width: 816.37795276, height: 1345.511811)
+    let signatureSize = CGSize(width: 125, height: 50)
+    var pdfURL: URL?
     
     let pdfView: PDFView = {
         let view = PDFView()
@@ -41,13 +43,14 @@ class ContractDisplayController: UIViewController {
     
     
     override func viewDidLoad() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Print", style: .plain, target: self, action: #selector(printTapped))
         lenderSignature = UIImage(data: lenderImageData!)
         lendeeSignature = UIImage(data: lendeeImageData!)
         let pdf = SimplePDF(pageSize: legalPaperSize)
-        let lenderAttachment = NSTextAttachment()
-        lenderAttachment.image = lenderSignature
-        let lendeeAttachment = NSTextAttachment()
-        lendeeAttachment.image = lendeeSignature
+        
+        lenderSignature = resizeImage(image: lenderSignature!, targetSize: signatureSize)
+        lendeeSignature = resizeImage(image: lendeeSignature!, targetSize: signatureSize)
+    
         let loan: String = """
                                                             LOAN AGREEMENT
           
@@ -110,28 +113,30 @@ class ContractDisplayController: UIViewController {
           
         VII. GOVERNING LAW
           
-        This Note shall be construed in accordance with the laws of the State of California.
+        This Note shall be construed in accordance with the laws of the State of \(state).
           
           
         VIII. SIGNATURES
           
-        This Note shall be signed by john doe and Erick Espinoza.
-          
-        [SIGNATURE PAGE FOLLOWS]
+        This Note shall be signed by \(lendeeName) and \(lenderName).
+        
         
         """
         pdf.addText(loan)
-        pdf.beginNewPage()
         
         let signaturePage0 =
             
         """
+        [signature page]
+        
         IN WITNESS WHEREOF, this Agreement has been executed and delivered in the manner prescribed by law as of the date first written above.
           
         Signed this \(day) day of \(month), \(year), at \(city), _________________________ .
           
           
         Borrower:
+        \(lendeeName)
+        
         By:
         """
         pdf.addText(signaturePage0)
@@ -139,16 +144,24 @@ class ContractDisplayController: UIViewController {
         
         let signaturePage1 =
         """
+          _______________________________________________
           
-          
-        Lender:
-        \(String(describing: lenderName))
+        Lendee:
+        \(lendeeName)
         
         By:
-        """
         
+        """
         pdf.addText(signaturePage1)
         pdf.addImage(lendeeSignature!)
+        let signaturePage2 =
+        """
+        _______________________________________________
+        Lender:
+        \(lenderName)
+        
+        """
+        pdf.addText(signaturePage2)
             
         
         view.addSubview(pdfView)
@@ -156,14 +169,15 @@ class ContractDisplayController: UIViewController {
         
         NSLayoutConstraint.activate([
                                      pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-                                     pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-                                     pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 15),
+                                     pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+                                     pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
                                      pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 15),])
         if let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
             
             let fileName = "\(lenderName)+\(lendeeName)\(date).pdf"
             let savedPDF = documentDirectories + "/" + fileName
             let url = URL(fileURLWithPath: savedPDF)
+            pdfURL = url
             
             let pdfData = pdf.generatePDFdata()
             do{
@@ -177,11 +191,47 @@ class ContractDisplayController: UIViewController {
                 print(error)
             }
         }
+    }
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
         
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
         
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
     
-    
-
+    @objc func printTapped(sender: UIBarButtonItem) {
+        if UIPrintInteractionController.canPrint(pdfURL!) {
+            let printInfo = UIPrintInfo(dictionary: nil)
+            printInfo.jobName = pdfURL!.lastPathComponent
+            printInfo.outputType = .general
+            
+            let printController = UIPrintInteractionController.shared
+            printController.printInfo = printInfo
+            printController.showsNumberOfCopies = true
+            
+            printController.printingItem = pdfURL
+            
+            printController.present(animated: true, completionHandler: nil)
+        }
+    }
 }
 

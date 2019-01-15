@@ -8,10 +8,14 @@
 
 import UIKit
 
-class Cell: UICollectionViewCell {
+class Cell: UICollectionViewCell, UIGestureRecognizerDelegate {
     let colorArr:[String] = ["#ff5432","#ff8731","#49ff30"]
     
     static var identifier: String = "Cell"
+    
+    var pan: UIPanGestureRecognizer!
+    var deleteLabel1: UILabel!
+    var deleteLabel2: UILabel!
     
     var nameLable: UILabel = {
         let lable = UILabel(frame: .zero)
@@ -109,6 +113,21 @@ class Cell: UICollectionViewCell {
         self.layer.shadowRadius = 5
         self.layer.shadowOffset = CGSize(width: 0, height: 5)
         
+        deleteLabel1 = UILabel()
+        deleteLabel1.text = "delete"
+        deleteLabel1.textColor = UIColor.white
+        self.insertSubview(deleteLabel1, belowSubview: self.contentView)
+        
+        deleteLabel2 = UILabel()
+        deleteLabel2.text = "delete"
+        deleteLabel2.textColor = UIColor.white
+        self.insertSubview(deleteLabel2, belowSubview: self.contentView)
+        
+        pan = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
+        pan.delegate = self
+        self.addGestureRecognizer(pan)
+
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -121,7 +140,6 @@ class Cell: UICollectionViewCell {
     // sets the alpha to 0.5 when a user presses and holds a view
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        
         self.alpha = 0.5
         
     }
@@ -133,6 +151,43 @@ class Cell: UICollectionViewCell {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.alpha = 1
     }
+
+    
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if (pan.state == UIGestureRecognizer.State.changed) {
+            let p: CGPoint = pan.translation(in: self)
+            let width = self.contentView.frame.width
+            let height = self.contentView.frame.height
+            self.contentView.frame = CGRect(x: p.x,y: 0, width: width, height: height);
+            self.deleteLabel1.frame = CGRect(x: p.x - deleteLabel1.frame.size.width-10, y: 0, width: 100, height: height)
+            self.deleteLabel2.frame = CGRect(x: p.x + width + deleteLabel2.frame.size.width, y: 0, width: 100, height: height)
+        }
+        
+    }
+    
+    @objc func onPan(_ pan: UIPanGestureRecognizer) {
+        if pan.state == UIGestureRecognizer.State.began {
+            
+        } else if pan.state == UIGestureRecognizer.State.changed {
+            self.setNeedsLayout()
+        } else {
+            if abs(pan.velocity(in: self).x) > 500 {
+                let collectionView: UICollectionView = self.superview as! UICollectionView
+                let indexPath: IndexPath = collectionView.indexPathForItem(at: self.center)!
+                collectionView.delegate?.collectionView!(collectionView, performAction: #selector(onPan(_:)), forItemAt: indexPath, withSender: nil)
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.setNeedsLayout()
+                    self.layoutIfNeeded()
+                })
+            }
+        }
+    }
+    
     
 }
 

@@ -46,7 +46,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowRadius = 5
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.backgroundColor = UIColor.init(hexString: "#72a8ff")
+        view.backgroundColor = UIColor.white
         
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +91,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowRadius = 5
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.backgroundColor = UIColor.init(hexString: "#72a8ff")
+        view.backgroundColor = .white
         
         
         let datePicker = UIDatePicker()
@@ -103,14 +103,23 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         datePicker.layer.shadowOpacity = 0.5
         datePicker.layer.shadowRadius = 5
         datePicker.layer.shadowOffset = CGSize(width: 0, height: 5)
-        datePicker.backgroundColor = UIColor.init(hexString: "#72a8ff")
+        datePicker.backgroundColor = .white
+        
+        
+        let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.text = "When is the money Due?"
+        
         
         view.addSubview(datePicker)
+        view.addSubview(lable)
         
         NSLayoutConstraint.activate([datePicker.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
                                      datePicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
                                      datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10),
-                                     datePicker.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10)
+                                     datePicker.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10),
+                                     lable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                     lable.topAnchor.constraint(equalTo: view.topAnchor, constant: 0)
                                      ])
         
         return view
@@ -123,7 +132,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowRadius = 5
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.backgroundColor = UIColor.init(hexString: "#72a8ff")
+        view.backgroundColor = .white
         
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
@@ -166,7 +175,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowRadius = 5
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.backgroundColor = UIColor.init(hexString: "#72a8ff")
+        view.backgroundColor = .white
         
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
@@ -278,11 +287,11 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         let view = UIView()
         view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 30
         view.layer.shadowOpacity = 0.5
         view.layer.shadowRadius = 5
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.backgroundColor = UIColor.init(hexString: "#72a8ff")
+        view.backgroundColor = .white
         
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
@@ -395,7 +404,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowRadius = 5
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.backgroundColor = UIColor.init(hexString: "#72a8ff")
+        view.backgroundColor = .white
         
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
@@ -485,6 +494,28 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         button.addTarget(self, action: #selector(nextButtontapDown), for: [.touchDown])
         return button
     }()
+    
+    
+    let exitButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Back", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.borderColor = UIColor.init(hexString: "#919191").cgColor
+        button.layer.borderWidth = 1
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
+        button.layer.masksToBounds = false
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.5
+        button.layer.cornerRadius = 15
+        button.addTarget(self, action: #selector(backButtontapCancelled), for: [.touchCancel, .touchDragExit, .touchUpOutside])
+        button.addTarget(self, action: #selector(backButtontapUp), for: [.touchUpInside])
+        button.addTarget(self, action: #selector(exitButtontapDown), for: [.touchDown])
+        return button
+    }()
+    
     let backButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -530,17 +561,24 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
     
     
     override func viewDidLoad() {
+        super .viewDidLoad()
+        
+        let gradient = CAGradientLayer()
+        
+        gradient.frame = UIScreen.main.bounds
+        gradient.colors = [UIColor.init(hexString: "#00d4ff").cgColor, UIColor.init(hexString: "#0015ff").cgColor]
+        
+        view.layer.insertSublayer(gradient, at: 0)
         hideKeyboardWhenTappedAround()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        view.backgroundColor = .white
-        scrollView.delegate = self
-        
+        scrollView.delegate = self;
+        scrollView.backgroundColor = UIColor.clear;
         view.addSubview(scrollView)
         view.addSubview(nextButton)
         view.addSubview(backButton)
+        view.addSubview(exitButton)
         scrollView.addSubview(saveButton)
-        scrollView.backgroundColor = .white
         pageControl.currentPage = 0
         
         scrollView.addSubview(amountView)
@@ -566,14 +604,19 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
                                      scrollView.heightAnchor.constraint(equalToConstant: viewH + 100),
                                      
                                      
-                                     nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -45),
+                                     nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -125),
                                      nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -45),
                                      nextButton.widthAnchor.constraint(equalToConstant: 75),
                                      
                                      
-                                     backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -45),
+                                     backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -125),
                                      backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 45),
                                      backButton.widthAnchor.constraint(equalToConstant: 75),
+                                     
+                                     
+                                     exitButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+                                     exitButton.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 0),
+                                     exitButton.widthAnchor.constraint(equalToConstant: 75),
                                      
                                      
                                      
@@ -615,32 +658,35 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
                                      
                                      
                                      lenderSignatureView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     lenderSignatureView.leadingAnchor.constraint(equalTo: lendeeAddressView.trailingAnchor, constant: 75),
-                                     lenderSignatureView.heightAnchor.constraint(equalToConstant: viewH),
-                                     lenderSignatureView.widthAnchor.constraint(equalToConstant: viewW),
+                                     lenderSignatureView.leadingAnchor.constraint(equalTo: lendeeAddressView.trailingAnchor, constant: 50),
+                                     lenderSignatureView.heightAnchor.constraint(equalToConstant: viewH - 135),
+                                     lenderSignatureView.widthAnchor.constraint(equalToConstant: viewW + 50),
                                      
                                      lenderSignatureLabel.bottomAnchor.constraint(equalTo: lenderSignatureView.topAnchor, constant: -1),
                                      lenderSignatureLabel.centerXAnchor.constraint(equalTo: lenderSignatureView.centerXAnchor),
                                      
                                      lendeeSignatureView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     lendeeSignatureView.leadingAnchor.constraint(equalTo: lenderSignatureView.trailingAnchor, constant: 75),
-                                     lendeeSignatureView.heightAnchor.constraint(equalToConstant: viewH),
-                                     lendeeSignatureView.widthAnchor.constraint(equalToConstant: viewW),
+                                     lendeeSignatureView.leadingAnchor.constraint(equalTo: lenderSignatureView.trailingAnchor, constant: 25),
+                                     lendeeSignatureView.heightAnchor.constraint(equalToConstant: viewH - 135),
+                                     lendeeSignatureView.widthAnchor.constraint(equalToConstant: viewW + 50),
                                      
                                      lendeeSignatureLabel.bottomAnchor.constraint(equalTo: lendeeSignatureView.topAnchor, constant: -1),
                                      lendeeSignatureLabel.centerXAnchor.constraint(equalTo: lendeeSignatureView.centerXAnchor),
                                      
                                      
                                      saveButton.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     saveButton.leadingAnchor.constraint(equalTo: lendeeSignatureView.trailingAnchor, constant: 75),
+                                     saveButton.leadingAnchor.constraint(equalTo: lendeeSignatureView.trailingAnchor, constant: 50),
                                      saveButton.heightAnchor.constraint(equalToConstant: viewH),
                                      saveButton.widthAnchor.constraint(equalToConstant: viewW),
                                      ])
         
         
+        
     }
     
-    
+    @objc func exitButtontapDown(_ sender: AnyObject) -> Void{
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
     @objc func nextButtontapUp(_ sender: AnyObject) -> Void{
@@ -731,6 +777,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
             }
             if let textField1 = self.lenderAddressView.viewWithTag(1) as? UITextField {
                 form.lenderAddress = ("\(form.lenderAddress), \(textField1.text ?? "") ")
+                form.city = textField1.text ?? ""
             }
             if let textField2 = self.lenderAddressView.viewWithTag(2) as? UITextField {
                 form.lenderAddress = ("\(form.lenderAddress), \(textField2.text ?? "") ")
@@ -746,7 +793,6 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
             }
             if let textField1 = self.lendeeAddressView.viewWithTag(1) as? UITextField {
                 form.lendeeAddress = ("\(form.lendeeAddress), \(textField1.text ?? "") ")
-                form.city = textField1.text ?? ""
             }
             if let textField2 = self.lendeeAddressView.viewWithTag(2) as? UITextField {
                 form.lendeeAddress = ("\(form.lendeeAddress), \(textField2.text ?? "") ")
@@ -775,21 +821,6 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
      func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         nextButton.isUserInteractionEnabled = true
         backButton.isUserInteractionEnabled = true
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification){
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            
-            if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height - 225
-            }
-        }
-        
-    }
-    
-    @objc func keyboardWillHide(){
-        self.view.frame.origin.y = 0
-        
     }
     
 }

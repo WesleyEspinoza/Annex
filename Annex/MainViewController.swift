@@ -70,6 +70,7 @@ class MainViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(false, animated: true)
         forms = RealmHelper.retrieveForm()
@@ -87,6 +88,11 @@ class MainViewController: UIViewController{
         navigationController?.navigationBar.barTintColor = .white
         navigationItem.title = "Annex"
         
+        if (!didAppAlreadyLaunchedOnce()) {
+            let tutVC = TutVC()
+            navigationController?.present(tutVC, animated: true, completion: nil)
+        }
+        
         
         
         NSLayoutConstraint.activate([addButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -15 ),
@@ -97,8 +103,6 @@ class MainViewController: UIViewController{
     
     @objc func addButtontapUp(_ sender: AnyObject) -> Void{
         addButton.alpha = 1
-        let nextVC = ContractCreationViewController()
-        navigationController?.present(nextVC, animated: true, completion: nil)
         
     }
     @objc func addButtontapCancelled(_ sender: AnyObject) -> Void{
@@ -106,15 +110,15 @@ class MainViewController: UIViewController{
     }
     @objc func addButtontapDown(_ sender: AnyObject) -> Void{
         addButton.alpha = 0.5
-        
-        
+        let nextVC = ContractCreationViewController()
+        navigationController?.present(nextVC, animated: true, completion: nil)
     }
 }
 
 extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
+                numberOfItemsInSection section: Int) -> Int {
         return forms.count
     }
     
@@ -128,12 +132,20 @@ extension MainViewController: UICollectionViewDataSource {
         cell.dueDateLable.text = "\(form.dueDate)"
         return cell
     }
+    
+     func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        
+        RealmHelper.deleteForm(form: forms[indexPath.row])
+        
+        forms = RealmHelper.retrieveForm()
+    }
 }
 
 extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let nextViewController = ContractDisplayController()
+        navigationController?.pushViewController(nextViewController, animated: true)
         let form = forms[indexPath.row]
         nextViewController.lenderAddress = form.lenderAddress
         nextViewController.lendeeAddress = form.lendeeAddress
@@ -150,8 +162,6 @@ extension MainViewController: UICollectionViewDelegate {
         nextViewController.day = form.day
         nextViewController.year = form.year
         nextViewController.counter = indexPath.row
-        
-        navigationController?.pushViewController(nextViewController, animated: true)
     }
     
 }
@@ -188,19 +198,18 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
     
     
-}
-
-
-
-extension UIViewController{
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+    
+    func didAppAlreadyLaunchedOnce()->Bool{
+        let defaults = UserDefaults.standard
+        
+        if let _ = defaults.string(forKey: "didAppAlreadyLaunchedOnce"){
+            return true
+        }else{
+            defaults.set(true, forKey: "didAppAlreadyLaunchedOnce")
+            return false
+        }
     }
     
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
+    
 }
 
