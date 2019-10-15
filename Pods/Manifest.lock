@@ -1,11 +1,11 @@
 PODS:
-  - Realm (3.13.1):
-    - Realm/Headers (= 3.13.1)
-  - Realm/Headers (3.13.1)
-  - RealmSwift (3.13.1):
-    - Realm (= 3.13.1)
+  - Realm (3.19.0):
+    - Realm/Headers (= 3.19.0)
+  - Realm/Headers (3.19.0)
+  - RealmSwift (3.19.0):
+    - Realm (= 3.19.0)
   - SimplePDF (3.0.0)
-  - SwiftSignatureView (2.0.2)
+  - SwiftSignatureView (2.2.2)
 
 DEPENDENCIES:
   - RealmSwift
@@ -13,18 +13,18 @@ DEPENDENCIES:
   - SwiftSignatureView
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Realm
     - RealmSwift
     - SimplePDF
     - SwiftSignatureView
 
 SPEC CHECKSUMS:
-  Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
-  RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
+  Realm: 995d585bcf699aaff226715886c849a29dd3d07f
+  RealmSwift: 35f284a537989f2187b413e5917091948cb87a3f
   SimplePDF: 903143ede36965886997a5c1bc6b8940b082ba20
-  SwiftSignatureView: f9ea7317c6c5520b21190e499fbb859ae85c4e55
+  SwiftSignatureView: 7c163f7b3d394d5db060a0ae1080ff8bc4c25c4e
 
 PODFILE CHECKSUM: cedc5cf5582f4a945aea9cc361aaac6b5dabc001
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.3

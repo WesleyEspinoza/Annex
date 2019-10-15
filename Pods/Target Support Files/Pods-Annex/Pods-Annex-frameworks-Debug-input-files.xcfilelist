@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-Annex/Pods-Annex-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
+${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework
+${BUILT_PRODUCTS_DIR}/SimplePDF/SimplePDF.framework
+${BUILT_PRODUCTS_DIR}/SwiftSignatureView/SwiftSignatureView.framework

@@ -39,47 +39,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
     }()
     
     
-    let amountView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 15
-        view.layer.shadowOpacity = 0.5
-        view.layer.shadowRadius = 5
-        view.layer.shadowOffset = CGSize(width: 0, height: 5)
-        view.backgroundColor = UIColor.white
-        
-        let lable = UILabel()
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        lable.text = "How much money is being lent?"
-        
-        let textBox = UITextField()
-        textBox.translatesAutoresizingMaskIntoConstraints = false
-        textBox.keyboardType = .numbersAndPunctuation
-        
-        let line = UIView()
-        line.translatesAutoresizingMaskIntoConstraints = false
-        line.backgroundColor = .black
-        
-        view.addSubview(lable)
-        view.addSubview(textBox)
-        view.addSubview(line)
-        NSLayoutConstraint.activate([lable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-                                     lable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -25),
-                                     
-                                     
-                                     textBox.topAnchor.constraint(equalTo: lable.bottomAnchor, constant: 25),
-                                     textBox.centerXAnchor.constraint(equalTo: lable.centerXAnchor, constant: 0),
-                                     textBox.heightAnchor.constraint(equalToConstant: 25),
-                                     textBox.widthAnchor.constraint(equalToConstant: 200),
-                                     
-                                     
-                                     line.leadingAnchor.constraint(equalTo: textBox.leadingAnchor, constant: 0),
-                                     line.trailingAnchor.constraint(equalTo: textBox.trailingAnchor, constant: 0),
-                                     line.topAnchor.constraint(equalTo: textBox.bottomAnchor, constant: 0),
-                                     line.heightAnchor.constraint(equalToConstant: 1)])
-    
-        return view
-    }()
+    var amountView: UIView?
     
     
     let dueDateView: UIView = {
@@ -563,6 +523,8 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super .viewDidLoad()
         
+        amountView = createLableAndTextBoxView(lableText: "How much money is being lent?", placeHolderText: "525.00")
+        
         let gradient = CAGradientLayer()
         
         gradient.frame = UIScreen.main.bounds
@@ -581,7 +543,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(saveButton)
         pageControl.currentPage = 0
         
-        scrollView.addSubview(amountView)
+        scrollView.addSubview(amountView!)
         scrollView.addSubview(dueDateView)
         scrollView.addSubview(lenderView)
         scrollView.addSubview(lenderAddressView)
@@ -620,14 +582,14 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
                                      
                                      
                                      
-                                     amountView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     amountView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-                                     amountView.heightAnchor.constraint(equalToConstant: viewH),
-                                     amountView.widthAnchor.constraint(equalToConstant: viewW),
+                                     amountView!.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
+                                     amountView!.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+                                     amountView!.heightAnchor.constraint(equalToConstant: viewH),
+                                     amountView!.widthAnchor.constraint(equalToConstant: viewW),
                                      
                                      
                                      dueDateView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     dueDateView.leadingAnchor.constraint(equalTo: amountView.trailingAnchor, constant: 75),
+                                     dueDateView.leadingAnchor.constraint(equalTo: amountView!.trailingAnchor, constant: 75),
                                      dueDateView.heightAnchor.constraint(equalToConstant: viewH),
                                      dueDateView.widthAnchor.constraint(equalToConstant: viewW),
                                      
@@ -753,9 +715,9 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         }
         
         
-        for view in amountView.subviews {
+        for view in amountView!.subviews {
             if let textField = view as? UITextField {
-                form.amount = textField.text ?? ""
+                form.amount = "$\(textField.text ?? "")"
             }
         }
         

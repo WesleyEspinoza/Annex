@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "18EDC2807FB278DAA5C872D19372B07D"
+               BlueprintIdentifier = "4A622AC352147B03D34EE70B98F592BC"
+               BuildableName = "SimplePDF.framework"
                BlueprintName = "SimplePDF"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SimplePDF.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -9,7 +9,7 @@
 import UIKit
 
 class Cell: UICollectionViewCell, UIGestureRecognizerDelegate {
-    let colorArr:[String] = ["#ff5432","#ff8731","#49ff30"]
+    let colorArr:[String] = ["#c44444","#4dc444","#c48444"]
     
     static var identifier: String = "Cell"
     
@@ -82,13 +82,15 @@ class Cell: UICollectionViewCell, UIGestureRecognizerDelegate {
         
         
         
+        
+        
         // Aplying constraints
         NSLayoutConstraint.activate([ nameLable.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
                                       nameLable.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
                                       
                                       
                                       moneyLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -50),
-                                      moneyLabel.topAnchor.constraint(equalTo: nameLable.topAnchor, constant: 25),
+                                      moneyLabel.topAnchor.constraint(equalTo: nameLable.topAnchor, constant: 15),
                                       
                                       
                                       creationDateLable.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 8),

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 		2B4D14DA21EBB78900C21358 /* realmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14D921EBB78900C21358 /* realmHelper.swift */; };
 		2B4D14DE21ED134A00C21358 /* TutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14DD21ED134A00C21358 /* TutVC.swift */; };
 		2B4D14E021ED19FA00C21358 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14DF21ED19FA00C21358 /* Extension.swift */; };
+		2B4D14E621F0F82B00C21358 /* ContractCreationHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14E521F0F82B00C21358 /* ContractCreationHelpers.swift */; };
 		C058C1E3AD10F3BF55229B10 /* Pods_Annex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6861BD14C50EE9AC22B5568 /* Pods_Annex.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		2B4D14D921EBB78900C21358 /* realmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = realmHelper.swift; sourceTree = "<group>"; };
 		2B4D14DD21ED134A00C21358 /* TutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutVC.swift; sourceTree = "<group>"; };
 		2B4D14DF21ED19FA00C21358 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		2B4D14E521F0F82B00C21358 /* ContractCreationHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCreationHelpers.swift; sourceTree = "<group>"; };
 		D6861BD14C50EE9AC22B5568 /* Pods_Annex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Annex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F189BDA059275B4516679010 /* Pods-Annex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Annex.release.xcconfig"; path = "Pods/Target Support Files/Pods-Annex/Pods-Annex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,20 +78,53 @@
 			isa = PBXGroup;
 			children = (
 				2B4D14A721E52A4800C21358 /* AppDelegate.swift */,
-				2B4D14C921E66B2F00C21358 /* Cell.swift */,
-				2B4D14CB21E714ED00C21358 /* ContractCreationViewController.swift */,
-				2B4D14DD21ED134A00C21358 /* TutVC.swift */,
-				2B4D14A921E52A4800C21358 /* MainViewController.swift */,
-				2B4D14DF21ED19FA00C21358 /* Extension.swift */,
-				2B4D14D321E8587400C21358 /* ContractDisplayController.swift */,
-				2B4D14BF21E5545100C21358 /* customFlowLayout.swift */,
+				2B9F62C72356442E006F796B /* ViewControllers */,
+				2B9F62C823564446006F796B /* Views */,
+				2B9F62C923564460006F796B /* Extensions */,
 				2B4D14AE21E52A4800C21358 /* Assets.xcassets */,
 				2B4D14B021E52A4800C21358 /* LaunchScreen.storyboard */,
 				2B4D14B321E52A4800C21358 /* Info.plist */,
-				2B4D14D121E8309D00C21358 /* Form.swift */,
-				2B4D14D921EBB78900C21358 /* realmHelper.swift */,
+				2B9F62CA23564480006F796B /* Realm */,
 			);
 			path = Annex;
+			sourceTree = "<group>";
+		};
+		2B9F62C72356442E006F796B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2B4D14DD21ED134A00C21358 /* TutVC.swift */,
+				2B4D14A921E52A4800C21358 /* MainViewController.swift */,
+				2B4D14D321E8587400C21358 /* ContractDisplayController.swift */,
+				2B4D14CB21E714ED00C21358 /* ContractCreationViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2B9F62C823564446006F796B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B4D14C921E66B2F00C21358 /* Cell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2B9F62C923564460006F796B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2B4D14E521F0F82B00C21358 /* ContractCreationHelpers.swift */,
+				2B4D14BF21E5545100C21358 /* customFlowLayout.swift */,
+				2B4D14DF21ED19FA00C21358 /* Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2B9F62CA23564480006F796B /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				2B4D14D921EBB78900C21358 /* realmHelper.swift */,
+				2B4D14D121E8309D00C21358 /* Form.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		5F0C8F050279D29AC9715CA8 /* Pods */ = {
@@ -143,6 +178,7 @@
 				TargetAttributes = {
 					2B4D14A321E52A4800C21358 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -183,26 +219,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Annex/Pods-Annex-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SimplePDF/SimplePDF.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftSignatureView/SwiftSignatureView.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Annex/Pods-Annex-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimplePDF.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSignatureView.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Annex/Pods-Annex-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Annex/Pods-Annex-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Annex/Pods-Annex-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9994DD2AA7BFFC0406EB59E7 /* [CP] Check Pods Manifest.lock */ = {
@@ -242,6 +267,7 @@
 				2B4D14E021ED19FA00C21358 /* Extension.swift in Sources */,
 				2B4D14DA21EBB78900C21358 /* realmHelper.swift in Sources */,
 				2B4D14DE21ED134A00C21358 /* TutVC.swift in Sources */,
+				2B4D14E621F0F82B00C21358 /* ContractCreationHelpers.swift in Sources */,
 				2B4D14C021E5545100C21358 /* customFlowLayout.swift in Sources */,
 				2B4D14D221E8309D00C21358 /* Form.swift in Sources */,
 			);
@@ -391,7 +417,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ErespiStudios.Applications.Annex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -410,7 +436,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ErespiStudios.Applications.Annex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -128,8 +128,8 @@ extension MainViewController: UICollectionViewDataSource {
         let form = forms[indexPath.row]
         cell.nameLable.text = ("\(form.lendee)'s Constract")
         cell.moneyLabel.text = "\(form.amount)"
-        cell.creationDateLable.text = "\(form.creationDate)"
-        cell.dueDateLable.text = "\(form.dueDate)"
+        cell.creationDateLable.text = "Creation date: \(form.creationDate)"
+        cell.dueDateLable.text = "Due date: \(form.dueDate)"
         return cell
     }
     

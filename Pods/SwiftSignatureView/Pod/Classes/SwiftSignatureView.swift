@@ -9,11 +9,8 @@
 import UIKit
 
 public protocol SwiftSignatureViewDelegate: class {
-
     func swiftSignatureViewDidTapInside(_ view: SwiftSignatureView)
-
-    func swiftSignatureViewDidPanInside(_ view: SwiftSignatureView)
-
+    func swiftSignatureViewDidPanInside(_ view: SwiftSignatureView, _ pan:UIPanGestureRecognizer)
 }
 
 /// A lightweight, fast and customizable option for capturing fluid, variable-stroke-width signatures within your app.
@@ -59,16 +56,30 @@ open class SwiftSignatureView: UIView {
             }
         }
     }
-    
+
     /**
-    The UIImage representation of the signature. Read only.
+    The true backing variable used with core graphics. Private.
     */
-    fileprivate(set) open var signature:UIImage?
+    fileprivate var _signature:UIImage?
+    /**
+    The UIImage representation of the signature. Read/write.
+    */
+    open var signature:UIImage? {
+        get {
+            return _signature
+        }
+        set {
+            _signature = newValue
+            self.setNeedsDisplay()
+        }
+    }
+    
+    fileprivate var path = UIBezierPath()
     
     // MARK: Public Methods
     open func clear() {
+        self.path.removeAllPoints()
         signature = nil
-        self.setNeedsDisplay()
     }
     
     // MARK: Private Methods
@@ -85,6 +96,13 @@ open class SwiftSignatureView: UIView {
         super.init(frame: frame)        
         initialize()
     }
+    
+    public func getCroppedSignature() -> UIImage? {
+        guard let fullRender = signature else { return nil }
+        let bounds = self.scale(path.bounds.insetBy(dx: -maximumStrokeWidth/2 , dy: -maximumStrokeWidth/2), byFactor: fullRender.scale)
+        guard let imageRef = fullRender.cgImage?.cropping(to: bounds) else { return nil }
+        return UIImage(cgImage: imageRef)
+    }
 
     fileprivate func initialize() {
         let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SwiftSignatureView.tap(_:)))
@@ -100,13 +118,13 @@ open class SwiftSignatureView: UIView {
         let rect = self.bounds
         
         UIGraphicsBeginImageContextWithOptions(rect.size, false, UIScreen.main.scale)
-        if(signature == nil) {
-            signature = UIGraphicsGetImageFromCurrentImageContext()
+        if(_signature == nil) {
+            _signature = UIGraphicsGetImageFromCurrentImageContext()
         }
-        signature?.draw(in: rect)
+        _signature?.draw(in: rect)
         let currentPoint = tap.location(in: self)
         drawPointAt(currentPoint, pointSize: 5.0)
-        signature = UIGraphicsGetImageFromCurrentImageContext()
+        _signature = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         self.setNeedsDisplay()
 
@@ -124,11 +142,11 @@ open class SwiftSignatureView: UIView {
             if(strokeLength >= 1.0) {
                 let rect = self.bounds
                 UIGraphicsBeginImageContextWithOptions(rect.size, false, UIScreen.main.scale)
-                if(signature == nil) {
-                    signature = UIGraphicsGetImageFromCurrentImageContext()
+                if(_signature == nil) {
+                    _signature = UIGraphicsGetImageFromCurrentImageContext()
                 }
                 // Draw the prior signature
-                signature?.draw(in: rect)
+                _signature?.draw(in: rect)
                 
                 let delta:CGFloat = 0.5
                 let strokeScale:CGFloat = 50 // fudge factor based on empirical tests
@@ -137,7 +155,7 @@ open class SwiftSignatureView: UIView {
                 
                 drawQuadCurve(previousEndPoint, control: previousPoint, end: midPoint, startWidth:previousWidth, endWidth: currentWidth)
                 
-                signature = UIGraphicsGetImageFromCurrentImageContext()
+                _signature = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 previousPoint = currentPoint
                 previousEndPoint = midPoint
@@ -148,7 +166,8 @@ open class SwiftSignatureView: UIView {
         default:
             break
         }
-        self.delegate?.swiftSignatureViewDidPanInside(self)
+        
+        self.delegate?.swiftSignatureViewDidPanInside(self, pan)
     }
     
     fileprivate func distance(_ pt1:CGPoint, pt2:CGPoint) -> CGFloat {
@@ -160,7 +179,7 @@ open class SwiftSignatureView: UIView {
     }
     
     override open func draw(_ rect: CGRect) {
-        signature?.draw(in: rect)
+        _signature?.draw(in: rect)
     }
     
     fileprivate func getOffsetPoints(p0:CGPoint, p1:CGPoint, width:CGFloat) -> (p0:CGPoint, p1:CGPoint) {
@@ -185,7 +204,7 @@ open class SwiftSignatureView: UIView {
     
     fileprivate func drawQuadCurve(_ start:CGPoint, control:CGPoint, end:CGPoint, startWidth:CGFloat, endWidth:CGFloat) {
         if(start != control) {
-            let path = UIBezierPath()
+          //  let path = UIBezierPath()
             let controlWidth = (startWidth+endWidth)/2.0
             
             let startOffsets = getOffsetPoints(p0: start, p1: control, width: startWidth)
@@ -220,5 +239,15 @@ open class SwiftSignatureView: UIView {
         path.move(to: point)
         path.addLine(to: point)
         path.stroke()
+    }
+    
+    fileprivate func scale(_ rect: CGRect, byFactor factor: CGFloat) -> CGRect
+    {
+        var scaledRect = rect
+        scaledRect.origin.x *= factor
+        scaledRect.origin.y *= factor
+        scaledRect.size.width *= factor
+        scaledRect.size.height *= factor
+        return scaledRect
     }
 }

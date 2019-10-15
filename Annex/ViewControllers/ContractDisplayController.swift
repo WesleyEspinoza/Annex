@@ -52,10 +52,10 @@ class ContractDisplayController: UIViewController {
         lendeeSignature = resizeImage(image: lendeeSignature!, targetSize: signatureSize)
     
         let loan: String = """
-                                                            LOAN AGREEMENT
+                                                                                                    LOAN AGREEMENT
           
           
-        \(String(describing: amount))                                                                                           Date: \(String(describing: date))
+        \(String(describing: amount))                                                                                                                                             Date: \(String(describing: date))
           
         For value received, the undersigned \(String(describing: lendeeName)) (the "Borrower"), at \(String(describing: lendeeAddress)), promises to pay to the order of \(String(describing: lenderName)) (the "Lender"), at \(String(describing: lenderAddress)) (or at such other place as the Lender may designate in writing), the sum of \(String(describing: amount)) with no interest.
           
