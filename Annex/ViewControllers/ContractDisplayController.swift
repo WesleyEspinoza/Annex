@@ -13,7 +13,6 @@ import RealmSwift
 import PDFKit
 
 class ContractDisplayController: UIViewController {
-    var counter: Int = 1
     var lenderImageData: Data?
     var lendeeImageData: Data?
     var amount: String = ""

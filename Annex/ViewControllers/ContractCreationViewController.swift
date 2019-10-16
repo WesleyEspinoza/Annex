@@ -710,6 +710,7 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
                 form.year = yearFormatter.string(from: datePicker.date)
                 form.dueDate = strDate
                 form.creationDate = curDate
+                form.dateObj = datePicker.date
             }
             
         }

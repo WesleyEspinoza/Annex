@@ -23,6 +23,7 @@ extension MainViewController: UICollectionViewDataSource {
         cell.nameLabel.text = ("\(form.lendee)'s Constract")
         cell.creationDateLabel.text = "Creation date: \(form.creationDate)"
         cell.dueDateLabel.text = "Due date: \(form.dueDate)"
+        cell.dueDateObj = form.dateObj
         return cell
     }
     
@@ -54,7 +55,7 @@ extension MainViewController: UICollectionViewDelegate {
         nextViewController.month = form.month
         nextViewController.day = form.day
         nextViewController.year = form.year
-        nextViewController.counter = indexPath.row
+
     }
     
 }

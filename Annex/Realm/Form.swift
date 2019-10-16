@@ -25,4 +25,5 @@ class Form: Object{
     @objc dynamic var year: String = ""
     @objc dynamic var state: String = ""
     @objc dynamic var city: String = ""
+    @objc dynamic var dateObj: Date!
 }
