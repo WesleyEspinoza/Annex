@@ -219,11 +219,12 @@ class TutVC: UIViewController, UIScrollViewDelegate {
         button.addTarget(self, action: #selector(finishButtontapDown), for: [.touchDown])
         return button
     }()
+
     
     
     override func viewDidLoad() {
         super .viewDidLoad()
-        
+        	
         let gradient = CAGradientLayer()
         
         gradient.frame = UIScreen.main.bounds

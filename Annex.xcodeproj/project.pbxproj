@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B1C8CA82356C30800E89B14 /* MainVCExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C8CA72356C30800E89B14 /* MainVCExt.swift */; };
+		2B1C8CAA2356C55600E89B14 /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C8CA92356C55600E89B14 /* UILabelExt.swift */; };
 		2B4D14A821E52A4800C21358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14A721E52A4800C21358 /* AppDelegate.swift */; };
 		2B4D14AA21E52A4800C21358 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14A921E52A4800C21358 /* MainViewController.swift */; };
 		2B4D14AF21E52A4800C21358 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B4D14AE21E52A4800C21358 /* Assets.xcassets */; };
 		2B4D14B221E52A4800C21358 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4D14B021E52A4800C21358 /* LaunchScreen.storyboard */; };
 		2B4D14C021E5545100C21358 /* customFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14BF21E5545100C21358 /* customFlowLayout.swift */; };
-		2B4D14CA21E66B2F00C21358 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14C921E66B2F00C21358 /* Cell.swift */; };
+		2B4D14CA21E66B2F00C21358 /* ContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14C921E66B2F00C21358 /* ContractCell.swift */; };
 		2B4D14CC21E714ED00C21358 /* ContractCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14CB21E714ED00C21358 /* ContractCreationViewController.swift */; };
 		2B4D14D221E8309D00C21358 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14D121E8309D00C21358 /* Form.swift */; };
 		2B4D14D421E8587400C21358 /* ContractDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14D321E8587400C21358 /* ContractDisplayController.swift */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		1204D1A4C4085060D56E5BA3 /* Pods-Annex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Annex.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Annex/Pods-Annex.debug.xcconfig"; sourceTree = "<group>"; };
+		2B1C8CA72356C30800E89B14 /* MainVCExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCExt.swift; sourceTree = "<group>"; };
+		2B1C8CA92356C55600E89B14 /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
 		2B4D14A421E52A4800C21358 /* Annex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Annex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B4D14A721E52A4800C21358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B4D14A921E52A4800C21358 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -32,7 +36,7 @@
 		2B4D14B121E52A4800C21358 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B4D14B321E52A4800C21358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B4D14BF21E5545100C21358 /* customFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customFlowLayout.swift; sourceTree = "<group>"; };
-		2B4D14C921E66B2F00C21358 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		2B4D14C921E66B2F00C21358 /* ContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCell.swift; sourceTree = "<group>"; };
 		2B4D14CB21E714ED00C21358 /* ContractCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCreationViewController.swift; sourceTree = "<group>"; };
 		2B4D14D121E8309D00C21358 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		2B4D14D321E8587400C21358 /* ContractDisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractDisplayController.swift; sourceTree = "<group>"; };
@@ -103,7 +107,7 @@
 		2B9F62C823564446006F796B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2B4D14C921E66B2F00C21358 /* Cell.swift */,
+				2B4D14C921E66B2F00C21358 /* ContractCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -114,6 +118,8 @@
 				2B4D14E521F0F82B00C21358 /* ContractCreationHelpers.swift */,
 				2B4D14BF21E5545100C21358 /* customFlowLayout.swift */,
 				2B4D14DF21ED19FA00C21358 /* Extension.swift */,
+				2B1C8CA92356C55600E89B14 /* UILabelExt.swift */,
+				2B1C8CA72356C30800E89B14 /* MainVCExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -259,8 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B1C8CAA2356C55600E89B14 /* UILabelExt.swift in Sources */,
 				2B4D14AA21E52A4800C21358 /* MainViewController.swift in Sources */,
-				2B4D14CA21E66B2F00C21358 /* Cell.swift in Sources */,
+				2B1C8CA82356C30800E89B14 /* MainVCExt.swift in Sources */,
+				2B4D14CA21E66B2F00C21358 /* ContractCell.swift in Sources */,
 				2B4D14D421E8587400C21358 /* ContractDisplayController.swift in Sources */,
 				2B4D14A821E52A4800C21358 /* AppDelegate.swift in Sources */,
 				2B4D14CC21E714ED00C21358 /* ContractCreationViewController.swift in Sources */,
