@@ -12,7 +12,7 @@ import UIKit
 extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
-                numberOfItemsInSection section: Int) -> Int {
+                        numberOfItemsInSection section: Int) -> Int {
         return forms.count
     }
     
@@ -27,7 +27,7 @@ extension MainViewController: UICollectionViewDataSource {
         return cell
     }
     
-     func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+    func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
         
         RealmHelper.deleteForm(form: forms[indexPath.row])
         
@@ -55,7 +55,7 @@ extension MainViewController: UICollectionViewDelegate {
         nextViewController.month = form.month
         nextViewController.day = form.day
         nextViewController.year = form.year
-
+        
     }
     
 }

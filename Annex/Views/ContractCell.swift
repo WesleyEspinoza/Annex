@@ -57,14 +57,14 @@ class ContractCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         
         
         
-
+        
         
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(creationDateLabel)
         self.contentView.addSubview(dueDateLabel)
         self.contentView.addSubview(arrowLabel)
         self.contentView.addSubview(uniqueId)
-
+        
         
         
         

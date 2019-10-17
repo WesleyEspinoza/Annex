@@ -47,7 +47,7 @@ class TutVC: UIViewController, UIScrollViewDelegate {
         view.addSubview(lable)
         NSLayoutConstraint.activate([lable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
                                      lable.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
-                                     ])
+        ])
         
         return view
         
@@ -219,18 +219,18 @@ class TutVC: UIViewController, UIScrollViewDelegate {
         button.addTarget(self, action: #selector(finishButtontapDown), for: [.touchDown])
         return button
     }()
-
+    
     
     
     override func viewDidLoad() {
         super .viewDidLoad()
-        	
+        
         let gradient = CAGradientLayer()
         
         gradient.frame = UIScreen.main.bounds
         gradient.colors = [UIColor.init(hexString: "#00d4ff").cgColor, UIColor.init(hexString: "#0015ff").cgColor]
         
-         view.layer.insertSublayer(gradient, at: 0)
+        view.layer.insertSublayer(gradient, at: 0)
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(slide1)
@@ -255,82 +255,82 @@ class TutVC: UIViewController, UIScrollViewDelegate {
         scrollView.contentSize = CGSize(width:width, height: 1)
         
         NSLayoutConstraint.activate([
-                                     scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-                                     scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
-                                     scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-                                     scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-                                     
-                                     
-                                     slide1.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0),
-                                     slide1.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 0),
-                                     slide1.heightAnchor.constraint(equalToConstant: viewH),
-                                     slide1.widthAnchor.constraint(equalToConstant: viewW),
-                                     
-                                     
-                                     pictureSlide1.leadingAnchor.constraint(equalTo: slide1.trailingAnchor, constant: 125),
-                                     pictureSlide1.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
-                                     pictureSlide1.heightAnchor.constraint(equalToConstant: 400),
-                                     pictureSlide1.widthAnchor.constraint(equalToConstant: 200),
-                                     
-                                     
-                                     pictureSlide2.leadingAnchor.constraint(equalTo: pictureSlide1.trailingAnchor, constant: 175),
-                                     pictureSlide2.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
-                                     pictureSlide2.heightAnchor.constraint(equalToConstant: 400),
-                                     pictureSlide2.widthAnchor.constraint(equalToConstant: 200),
-                                     
-                                     
-                                     pictureSlide3.leadingAnchor.constraint(equalTo: pictureSlide2.trailingAnchor, constant: 175),
-                                     pictureSlide3.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
-                                     pictureSlide3.heightAnchor.constraint(equalToConstant: 400),
-                                     pictureSlide3.widthAnchor.constraint(equalToConstant: 200),
-                                     
-                                     
-                                     pictureSlide4.leadingAnchor.constraint(equalTo: pictureSlide3.trailingAnchor, constant: 175),
-                                     pictureSlide4.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
-                                     pictureSlide4.heightAnchor.constraint(equalToConstant: 400),
-                                     pictureSlide4.widthAnchor.constraint(equalToConstant: 200),
-                                     
-                                     
-                                     pictureSlide5.leadingAnchor.constraint(equalTo: pictureSlide4.trailingAnchor, constant: 175),
-                                     pictureSlide5.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
-                                     pictureSlide5.heightAnchor.constraint(equalToConstant: 400),
-                                     pictureSlide5.widthAnchor.constraint(equalToConstant: 200),
-                                     
-                                     
-                                     pictureSlide6.leadingAnchor.constraint(equalTo: pictureSlide5.trailingAnchor, constant: 175),
-                                     pictureSlide6.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
-                                     pictureSlide6.heightAnchor.constraint(equalToConstant: 400),
-                                     pictureSlide6.widthAnchor.constraint(equalToConstant: 200),
-                                     
-                                     
-                                     pictureSlide7.leadingAnchor.constraint(equalTo: pictureSlide6.trailingAnchor, constant: 175),
-                                     pictureSlide7.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
-                                     pictureSlide7.heightAnchor.constraint(equalToConstant: 400),
-                                     pictureSlide7.widthAnchor.constraint(equalToConstant: 200),
-                                     
-                                     
-                                     finishButton.leadingAnchor.constraint(equalTo: pictureSlide7.trailingAnchor, constant: 150),
-                                     finishButton.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 0),
-                                     finishButton.heightAnchor.constraint(equalToConstant: viewW),
-                                     finishButton.widthAnchor.constraint(equalToConstant: viewH),
-                                     
-                                     
-                                     
-                                     nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -35),
-                                     nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -125),
-                                     nextButton.widthAnchor.constraint(equalToConstant: 75),
-                                     
-                                     
-                                     skipButton.trailingAnchor.constraint(equalTo: nextButton.trailingAnchor, constant: 0),
-                                     skipButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-                                     skipButton.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 0),
-                                     
-                                     
-                                     backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35),
-                                     backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -125),
-                                     backButton.widthAnchor.constraint(equalToConstant: 75),])
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            
+            
+            slide1.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0),
+            slide1.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 0),
+            slide1.heightAnchor.constraint(equalToConstant: viewH),
+            slide1.widthAnchor.constraint(equalToConstant: viewW),
+            
+            
+            pictureSlide1.leadingAnchor.constraint(equalTo: slide1.trailingAnchor, constant: 125),
+            pictureSlide1.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
+            pictureSlide1.heightAnchor.constraint(equalToConstant: 400),
+            pictureSlide1.widthAnchor.constraint(equalToConstant: 200),
+            
+            
+            pictureSlide2.leadingAnchor.constraint(equalTo: pictureSlide1.trailingAnchor, constant: 175),
+            pictureSlide2.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
+            pictureSlide2.heightAnchor.constraint(equalToConstant: 400),
+            pictureSlide2.widthAnchor.constraint(equalToConstant: 200),
+            
+            
+            pictureSlide3.leadingAnchor.constraint(equalTo: pictureSlide2.trailingAnchor, constant: 175),
+            pictureSlide3.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
+            pictureSlide3.heightAnchor.constraint(equalToConstant: 400),
+            pictureSlide3.widthAnchor.constraint(equalToConstant: 200),
+            
+            
+            pictureSlide4.leadingAnchor.constraint(equalTo: pictureSlide3.trailingAnchor, constant: 175),
+            pictureSlide4.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
+            pictureSlide4.heightAnchor.constraint(equalToConstant: 400),
+            pictureSlide4.widthAnchor.constraint(equalToConstant: 200),
+            
+            
+            pictureSlide5.leadingAnchor.constraint(equalTo: pictureSlide4.trailingAnchor, constant: 175),
+            pictureSlide5.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
+            pictureSlide5.heightAnchor.constraint(equalToConstant: 400),
+            pictureSlide5.widthAnchor.constraint(equalToConstant: 200),
+            
+            
+            pictureSlide6.leadingAnchor.constraint(equalTo: pictureSlide5.trailingAnchor, constant: 175),
+            pictureSlide6.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
+            pictureSlide6.heightAnchor.constraint(equalToConstant: 400),
+            pictureSlide6.widthAnchor.constraint(equalToConstant: 200),
+            
+            
+            pictureSlide7.leadingAnchor.constraint(equalTo: pictureSlide6.trailingAnchor, constant: 175),
+            pictureSlide7.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: -75),
+            pictureSlide7.heightAnchor.constraint(equalToConstant: 400),
+            pictureSlide7.widthAnchor.constraint(equalToConstant: 200),
+            
+            
+            finishButton.leadingAnchor.constraint(equalTo: pictureSlide7.trailingAnchor, constant: 150),
+            finishButton.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 0),
+            finishButton.heightAnchor.constraint(equalToConstant: viewW),
+            finishButton.widthAnchor.constraint(equalToConstant: viewH),
+            
+            
+            
+            nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -35),
+            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -125),
+            nextButton.widthAnchor.constraint(equalToConstant: 75),
+            
+            
+            skipButton.trailingAnchor.constraint(equalTo: nextButton.trailingAnchor, constant: 0),
+            skipButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            skipButton.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 0),
+            
+            
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35),
+            backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -125),
+            backButton.widthAnchor.constraint(equalToConstant: 75),])
     }
-
+    
     
     @objc func nextButtontapUp(_ sender: AnyObject) -> Void{
         nextButton.alpha = 1
@@ -371,7 +371,7 @@ class TutVC: UIViewController, UIScrollViewDelegate {
     
     @objc func finishButtontapUp(_ sender: AnyObject) -> Void{
         finishButton.alpha = 1
-        }
+    }
     
     
     @objc func finishButtontapCancelled(_ sender: AnyObject) -> Void{

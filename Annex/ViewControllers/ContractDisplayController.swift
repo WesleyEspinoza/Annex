@@ -49,9 +49,9 @@ class ContractDisplayController: UIViewController {
         
         lenderSignature = resizeImage(image: lenderSignature!, targetSize: signatureSize)
         lendeeSignature = resizeImage(image: lendeeSignature!, targetSize: signatureSize)
-    
+        
         let loan: String = """
-                                                                                                    LOAN AGREEMENT
+        LOAN AGREEMENT
           
           
         \(String(describing: amount))                                                                                                                                             Date: \(String(describing: date))
@@ -161,16 +161,16 @@ class ContractDisplayController: UIViewController {
         
         """
         pdf.addText(signaturePage2)
-            
+        
         
         view.addSubview(pdfView)
         view.backgroundColor = .white
         
         NSLayoutConstraint.activate([
-                                     pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-                                     pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-                                     pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
-                                     pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 15),])
+            pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
+            pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 15),])
         if let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
             
             let fileName = "\(lenderName)+\(lendeeName)\(date).pdf"

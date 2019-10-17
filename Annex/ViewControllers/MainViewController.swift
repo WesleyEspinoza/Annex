@@ -26,7 +26,7 @@ class MainViewController: UIViewController{
         // Setting the datasource & delegate
         collectionView.dataSource = self
         collectionView.delegate = self
-         
+        
         // Customization
         collectionView.alwaysBounceVertical = true
         
@@ -47,7 +47,7 @@ class MainViewController: UIViewController{
     
     
     let addButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("+", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
@@ -76,7 +76,7 @@ class MainViewController: UIViewController{
         forms = RealmHelper.retrieveForm()
         
         
-            // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view, typically from a nib.
         
     }
     
@@ -93,7 +93,7 @@ class MainViewController: UIViewController{
             tutVC.modalPresentationStyle = .fullScreen
             navigationController?.present(tutVC, animated: true, completion: nil)
             
-        
+            
             
         }
         
