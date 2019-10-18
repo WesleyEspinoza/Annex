@@ -26,4 +26,5 @@ class Form: Object{
     @objc dynamic var state: String = ""
     @objc dynamic var city: String = ""
     @objc dynamic var dateObj: Date!
+    @objc dynamic var uniqueId: String = ""
 }

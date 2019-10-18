@@ -65,6 +65,22 @@ extension ContractCreationViewController {
         backButton.alpha = 0.5
     }
     
+    func randomString(_ length: Int) -> String {
+
+        let letters : NSString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+
+        var randomString = ""
+
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+
+        return randomString
+    }
+    
     
      func save() -> Void{
         let form = Form()
@@ -75,9 +91,9 @@ extension ContractCreationViewController {
         form.dueDate = dueDateView.getDateString()
         form.creationDate = dueDateView.getCurrentDate()
         form.dateObj = dueDateView.getDateObj()
+        form.uniqueId = randomString(12).inserting(separator: "-", every: 4)
         
-        
-        
+
         if let amountTextField = self.amountView.viewWithTag(1) as? UITextField  {
             form.amount = "$\(amountTextField.text ?? "")"
         }
@@ -137,9 +153,9 @@ extension ContractCreationViewController {
         form.lenderSignatureData =  lenderSignatureView.getSignatureData()
         form.lendeeSignatureData =  lendeeSignatureView.getSignatureData()
         
-        self.dismiss(animated: true) {
-            RealmHelper.addForm(form: form)
-        }
+        RealmHelper.addForm(form: form)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func saveButtontapCancelled(_ sender: AnyObject) -> Void{
@@ -147,5 +163,20 @@ extension ContractCreationViewController {
     }
     @objc func saveButtontapDown(_ sender: AnyObject) -> Void{
         backButton.alpha = 0.5
+    }
+}
+
+extension StringProtocol where Self: RangeReplaceableCollection {
+    mutating func insert(separator: Self, every n: Int) {
+        for index in indices.reversed() where index != startIndex &&
+            distance(from: startIndex, to: index) % n == 0 {
+            insert(contentsOf: separator, at: index)
+        }
+    }
+
+    func inserting(separator: Self, every n: Int) -> Self {
+        var string = self
+        string.insert(separator: separator, every: n)
+        return string
     }
 }

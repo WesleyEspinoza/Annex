@@ -130,7 +130,7 @@ class ContractDisplayController: UIViewController {
         
         IN WITNESS WHEREOF, this Agreement has been executed and delivered in the manner prescribed by law as of the date first written above.
           
-        Signed this \(day) day of \(month), \(year), at \(city), _________________________ .
+        Signed this \(day) day of \(month), \(year), at \(city).
           
           
         Borrower:
@@ -139,20 +139,20 @@ class ContractDisplayController: UIViewController {
         By:
         """
         pdf.addText(signaturePage0)
-        pdf.addImage(lenderSignature!)
+        pdf.addImage(lendeeSignature!)
         
         let signaturePage1 =
         """
           _______________________________________________
           
-        Lendee:
-        \(lendeeName)
+        Lender:
+        \(lenderName)
         
         By:
         
         """
         pdf.addText(signaturePage1)
-        pdf.addImage(lendeeSignature!)
+        pdf.addImage(lenderSignature!)
         let signaturePage2 =
         """
         _______________________________________________

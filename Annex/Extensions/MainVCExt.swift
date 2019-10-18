@@ -24,6 +24,7 @@ extension MainViewController: UICollectionViewDataSource {
         cell.creationDateLabel.text = "Creation date: \(form.creationDate)"
         cell.dueDateLabel.text = "Due date: \(form.dueDate)"
         cell.dueDateObj = form.dateObj
+        cell.uniqueId.text = "unique Id: \(form.uniqueId)"
         return cell
     }
     
@@ -38,23 +39,10 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let nextViewController = ContractDisplayController()
-        navigationController?.pushViewController(nextViewController, animated: true)
+        let preDisplayVc = ContractPreDisplayVC()
         let form = forms[indexPath.row]
-        nextViewController.lenderAddress = form.lenderAddress
-        nextViewController.lendeeAddress = form.lendeeAddress
-        nextViewController.dueDate = form.dueDate
-        nextViewController.date = form.creationDate
-        nextViewController.amount = form.amount
-        nextViewController.lenderName = form.lender
-        nextViewController.lendeeName = form.lendee
-        nextViewController.state = form.state
-        nextViewController.city = form.city
-        nextViewController.lenderImageData = form.lenderSignatureData
-        nextViewController.lendeeImageData = form.lendeeSignatureData
-        nextViewController.month = form.month
-        nextViewController.day = form.day
-        nextViewController.year = form.year
+        preDisplayVc.form = form
+        navigationController?.pushViewController(preDisplayVc, animated: true)
         
     }
     

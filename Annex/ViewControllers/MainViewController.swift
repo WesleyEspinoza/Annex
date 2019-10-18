@@ -15,6 +15,7 @@ class MainViewController: UIViewController{
             collectionView.reloadData()
         }
     }
+
     
     lazy var collectionView: UICollectionView = {
         // Instantiating the UICollectionView, using the default flow layout
