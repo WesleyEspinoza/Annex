@@ -12,35 +12,33 @@ import SimplePDF
 import RealmSwift
 import SwiftSignatureView
 
-class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
+class ContractCreationViewController: UICollectionViewController {
     
     
     var counter: Int = 0
     var offSet: Double = 22.5
     let viewH: CGFloat = 250
     let viewW: CGFloat = 300
-    
-    var scrollView: UIScrollView!
-    var pageControl: UIPageControl!
+
     var amountView: CustomView!
-    var dueDateView: CustomView!
+    var dueDateView: CustomDatePicker!
     var lenderView: CustomView!
     var lenderAddressView: CustomView!
     var lendeeAddressView: CustomView!
     var lendeeView: CustomView!
-    var datePicker: CustomView!
     var lenderSignatureView: CustomSignatureView!
     var lendeeSignatureView: CustomSignatureView!
     var nextButton: UIButton!
     var exitButton: UIButton!
     var backButton: UIButton!
     var saveButton: UIButton!
-    
+    var views: [UIView] = []
+    var pageControl: UIPageControl!
     override func viewDidLoad() {
         super .viewDidLoad()
         setupViews()
         setupGradient()
-        setupScrollView()
+        setupCollectionView()
         hideKeyboardWhenTappedAround()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -48,11 +46,6 @@ class ContractCreationViewController: UIViewController, UIScrollViewDelegate {
         
         
         
-    }
-    
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        nextButton.isUserInteractionEnabled = true
-        backButton.isUserInteractionEnabled = true
     }
     
 }

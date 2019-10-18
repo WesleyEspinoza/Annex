@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B0EE0562358E69F00B94BA3 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0EE0552358E69F00B94BA3 /* CustomView.swift */; };
 		2B0EE0582359272600B94BA3 /* CustomSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0EE0572359272600B94BA3 /* CustomSignatureView.swift */; };
+		2B0EE05A235962FD00B94BA3 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0EE059235962FD00B94BA3 /* CustomDatePicker.swift */; };
 		2B1C8CA82356C30800E89B14 /* MainVCExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C8CA72356C30800E89B14 /* MainVCExt.swift */; };
 		2B1C8CAA2356C55600E89B14 /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C8CA92356C55600E89B14 /* UILabelExt.swift */; };
 		2B1C8CB02358D3AE00E89B14 /* CCObjCFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C8CAF2358D3AE00E89B14 /* CCObjCFuncs.swift */; };
@@ -26,6 +27,7 @@
 		2B4D14DE21ED134A00C21358 /* TutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14DD21ED134A00C21358 /* TutVC.swift */; };
 		2B4D14E021ED19FA00C21358 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14DF21ED19FA00C21358 /* UIColorExtension.swift */; };
 		2B4D14E621F0F82B00C21358 /* CCViewBuilderxt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14E521F0F82B00C21358 /* CCViewBuilderxt.swift */; };
+		2BE13A5C2359C0DE0049FD43 /* ContractCreationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE13A5B2359C0DE0049FD43 /* ContractCreationCell.swift */; };
 		C058C1E3AD10F3BF55229B10 /* Pods_Annex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6861BD14C50EE9AC22B5568 /* Pods_Annex.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,7 @@
 		1204D1A4C4085060D56E5BA3 /* Pods-Annex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Annex.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Annex/Pods-Annex.debug.xcconfig"; sourceTree = "<group>"; };
 		2B0EE0552358E69F00B94BA3 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		2B0EE0572359272600B94BA3 /* CustomSignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSignatureView.swift; sourceTree = "<group>"; };
+		2B0EE059235962FD00B94BA3 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		2B1C8CA72356C30800E89B14 /* MainVCExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCExt.swift; sourceTree = "<group>"; };
 		2B1C8CA92356C55600E89B14 /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
 		2B1C8CAF2358D3AE00E89B14 /* CCObjCFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCObjCFuncs.swift; sourceTree = "<group>"; };
@@ -52,6 +55,7 @@
 		2B4D14DD21ED134A00C21358 /* TutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutVC.swift; sourceTree = "<group>"; };
 		2B4D14DF21ED19FA00C21358 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		2B4D14E521F0F82B00C21358 /* CCViewBuilderxt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCViewBuilderxt.swift; sourceTree = "<group>"; };
+		2BE13A5B2359C0DE0049FD43 /* ContractCreationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCreationCell.swift; sourceTree = "<group>"; };
 		D6861BD14C50EE9AC22B5568 /* Pods_Annex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Annex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F189BDA059275B4516679010 /* Pods-Annex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Annex.release.xcconfig"; path = "Pods/Target Support Files/Pods-Annex/Pods-Annex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,7 +130,9 @@
 			children = (
 				2B4D14C921E66B2F00C21358 /* ContractCell.swift */,
 				2B0EE0552358E69F00B94BA3 /* CustomView.swift */,
+				2BE13A5B2359C0DE0049FD43 /* ContractCreationCell.swift */,
 				2B0EE0572359272600B94BA3 /* CustomSignatureView.swift */,
+				2B0EE059235962FD00B94BA3 /* CustomDatePicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,8 +297,10 @@
 				2B1C8CA82356C30800E89B14 /* MainVCExt.swift in Sources */,
 				2B0EE0582359272600B94BA3 /* CustomSignatureView.swift in Sources */,
 				2B1C8CB02358D3AE00E89B14 /* CCObjCFuncs.swift in Sources */,
+				2BE13A5C2359C0DE0049FD43 /* ContractCreationCell.swift in Sources */,
 				2B4D14CA21E66B2F00C21358 /* ContractCell.swift in Sources */,
 				2B4D14D421E8587400C21358 /* ContractDisplayController.swift in Sources */,
+				2B0EE05A235962FD00B94BA3 /* CustomDatePicker.swift in Sources */,
 				2B4D14A821E52A4800C21358 /* AppDelegate.swift in Sources */,
 				2B1C8CB32358D48800E89B14 /* UIVCExtension.swift in Sources */,
 				2B4D14CC21E714ED00C21358 /* ContractCreationViewController.swift in Sources */,

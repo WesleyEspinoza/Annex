@@ -62,7 +62,7 @@ class CustomView: UIView{
         textBox.tag = tag
         stackView.addArrangedSubview(textBox)
         NSLayoutConstraint.activate([
-            textBox.widthAnchor.constraint(equalToConstant: stackView!.bounds.width / 3)
+            textBox.widthAnchor.constraint(equalToConstant: stackView!.bounds.width / 2)
         ])
     }
     func addDatePicker() {
@@ -74,6 +74,7 @@ class CustomView: UIView{
         datePicker.layer.cornerRadius = 15
         datePicker.layer.shadowOpacity = 0.5
         datePicker.layer.shadowRadius = 5
+        datePicker.tag = 0
         datePicker.layer.shadowOffset = CGSize(width: 0, height: 5)
         datePicker.backgroundColor = .white
         stackView.addArrangedSubview(datePicker)

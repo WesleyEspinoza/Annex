@@ -114,7 +114,9 @@ class MainViewController: UIViewController{
     }
     @objc func addButtontapDown(_ sender: AnyObject) -> Void{
         addButton.alpha = 0.5
-        let nextVC = ContractCreationViewController()
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let nextVC = ContractCreationViewController(collectionViewLayout: layout)
         navigationController?.present(nextVC, animated: true, completion: nil)
     }
 }

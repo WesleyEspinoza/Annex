@@ -12,61 +12,48 @@ import SwiftSignatureView
 
 extension ContractCreationViewController {
     func setupViews() {
-        scrollView = {
-            let view = UIScrollView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.isScrollEnabled = false
-            view.showsHorizontalScrollIndicator = true
-            view.isPagingEnabled = false
-            view.isUserInteractionEnabled = true
-            return view
-        }()
         
-        pageControl = {
-            let control = UIPageControl()
-            return control
-        }()
+
         
         
         amountView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH))
         amountView.addLabel(text: "How much is being lent?")
         let moneyLabel = UILabel()
         moneyLabel.text = "$ "
-        amountView.addTextbox(placeHolderText: "152.00", keyboardType: .numbersAndPunctuation, leftView: moneyLabel)
+        amountView.addTextbox(placeHolderText: "152.00", keyboardType: .numbersAndPunctuation, 1, leftView: moneyLabel)
         
         
-        dueDateView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH))
+        dueDateView = CustomDatePicker(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH))
         dueDateView.addLabel(text: "When is the money due?")
-        dueDateView.addDatePicker()
         
         
         lenderView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH))
         lenderView.addLabel(text: "Who is lending the money?")
-        lenderView.addTextbox(placeHolderText: "John Doe", keyboardType: .default)
+        lenderView.addTextbox(placeHolderText: "John Doe", keyboardType: .default, 1)
         
         
         
-        lenderAddressView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH))
+        lenderAddressView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH + 50))
         lenderAddressView.addLabel(text: "Lender's address")
-        lenderAddressView.addTextbox(placeHolderText: "555 Yellow Brick Rd", keyboardType: .default, 0)
-        lenderAddressView.addTextbox(placeHolderText: "Kansas City", keyboardType: .default, 1)
-        lenderAddressView.addTextbox(placeHolderText: "Kansas", keyboardType: .default, 2)
-        lenderAddressView.addTextbox(placeHolderText: "31658", keyboardType: .default, 3)
+        lenderAddressView.addTextbox(placeHolderText: "555 Yellow Brick Rd", keyboardType: .default, 1)
+        lenderAddressView.addTextbox(placeHolderText: "Kansas City", keyboardType: .default, 2)
+        lenderAddressView.addTextbox(placeHolderText: "Kansas", keyboardType: .default, 3)
+        lenderAddressView.addTextbox(placeHolderText: "31658", keyboardType: .default, 4)
         
         
         
         
-        lendeeAddressView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH))
+        lendeeAddressView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH + 50))
         lendeeAddressView.addLabel(text: "Lendee's address")
-        lendeeAddressView.addTextbox(placeHolderText: "556 Yellow Brick Rd", keyboardType: .default, 0)
-        lendeeAddressView.addTextbox(placeHolderText: "Kansas City", keyboardType: .default, 1)
-        lendeeAddressView.addTextbox(placeHolderText: "Kansas", keyboardType: .default, 2)
-        lendeeAddressView.addTextbox(placeHolderText: "31658", keyboardType: .default, 3)
+        lendeeAddressView.addTextbox(placeHolderText: "556 Yellow Brick Rd", keyboardType: .default, 1)
+        lendeeAddressView.addTextbox(placeHolderText: "Kansas City", keyboardType: .default, 2)
+        lendeeAddressView.addTextbox(placeHolderText: "Kansas", keyboardType: .default, 3)
+        lendeeAddressView.addTextbox(placeHolderText: "31658", keyboardType: .default, 4)
         
         
         lendeeView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH))
         lendeeView.addLabel(text: "Who is receiving the money?")
-        lendeeView.addTextbox(placeHolderText: "John Doe", keyboardType: .default)
+        lendeeView.addTextbox(placeHolderText: "John Doe", keyboardType: .default, 1)
         
         
         lenderSignatureView = CustomSignatureView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH))
@@ -156,6 +143,20 @@ extension ContractCreationViewController {
             button.addTarget(self, action: #selector(saveButtontapDown), for: [.touchDown])
             return button
         }()
+        
+        views.append(lenderView)
+        views.append(lenderAddressView)
+        views.append(amountView)
+        views.append(lendeeView)
+        views.append(lendeeAddressView)
+        views.append(lendeeSignatureView)
+        views.append(lenderSignatureView)
+        
+        pageControl = UIPageControl()
+        pageControl.currentPage = 0
+        pageControl.numberOfPages = views.count
+        pageControl.currentPageIndicatorTintColor = #colorLiteral(red: 0.4, green: 0.137254902, blue: 0.8196078431, alpha: 1)
+        pageControl.pageIndicatorTintColor = #colorLiteral(red: 0.6146181841, green: 0.4736413815, blue: 0.9775631096, alpha: 1)
     }
     
     func setupGradient(){
@@ -166,37 +167,19 @@ extension ContractCreationViewController {
         view.layer.insertSublayer(gradient, at: 0)
     }
     
-    func setupScrollView(){
-        scrollView.delegate = self;
-        scrollView.backgroundColor = UIColor.clear;
-        view.addSubview(scrollView)
+    func setupCollectionView(){
+        collectionView.delegate = self;
+        collectionView.backgroundColor = UIColor.white;
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(ContractCreationCell.self, forCellWithReuseIdentifier: ContractCreationCell.cellId)
+        collectionView.isPagingEnabled = true
         view.addSubview(nextButton)
         view.addSubview(backButton)
         view.addSubview(exitButton)
-        scrollView.addSubview(saveButton)
-        pageControl.currentPage = 0
+
         
-        scrollView.addSubview(amountView!)
-        scrollView.addSubview(dueDateView)
-        scrollView.addSubview(lenderView)
-        scrollView.addSubview(lenderAddressView)
-        scrollView.addSubview(lendeeView)
-        scrollView.addSubview(lendeeAddressView)
-        scrollView.addSubview(lenderSignatureView)
-        scrollView.addSubview(lendeeSignatureView)
-        
-        let totalViews = scrollView.subviews.count
-        let viewWidth = view.bounds.width
-        
-        let width = viewWidth * CGFloat(totalViews)
-        scrollView.contentSize = CGSize(width:width, height: 1)
-        
-        NSLayoutConstraint.activate([scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
-                                     scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-                                     scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
-                                     scrollView.heightAnchor.constraint(equalToConstant: self.view.bounds.height),
-                                     
-                                     
+        NSLayoutConstraint.activate([
                                      nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -125),
                                      nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -45),
                                      nextButton.widthAnchor.constraint(equalToConstant: 75),
@@ -210,62 +193,39 @@ extension ContractCreationViewController {
                                      exitButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
                                      exitButton.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 0),
                                      exitButton.widthAnchor.constraint(equalToConstant: 75),
-                                     
-                                     
-                                     
-                                     amountView!.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     amountView!.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-                                     amountView!.heightAnchor.constraint(equalToConstant: viewH),
-                                     amountView!.widthAnchor.constraint(equalToConstant: viewW),
-                                     
-                                     
-                                     dueDateView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     dueDateView.leadingAnchor.constraint(equalTo: amountView!.trailingAnchor, constant: 25),
-                                     dueDateView.heightAnchor.constraint(equalToConstant: viewH),
-                                     dueDateView.widthAnchor.constraint(equalToConstant: viewW),
-                                     
-                                     
-                                     
-                                     lenderView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     lenderView.leadingAnchor.constraint(equalTo: dueDateView.trailingAnchor, constant: 25),
-                                     lenderView.heightAnchor.constraint(equalToConstant: viewH),
-                                     lenderView.widthAnchor.constraint(equalToConstant: viewW),
-                                     
-                                     
-                                     lenderAddressView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     lenderAddressView.leadingAnchor.constraint(equalTo: lenderView.trailingAnchor, constant: 25),
-                                     lenderAddressView.heightAnchor.constraint(equalToConstant: viewH + 150),
-                                     lenderAddressView.widthAnchor.constraint(equalToConstant: viewW),
-                                     
-                                     
-                                     lendeeView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     lendeeView.leadingAnchor.constraint(equalTo: lenderAddressView.trailingAnchor, constant: 25),
-                                     lendeeView.heightAnchor.constraint(equalToConstant: viewH),
-                                     lendeeView.widthAnchor.constraint(equalToConstant: viewW),
-                                     
-                                     
-                                     lendeeAddressView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     lendeeAddressView.leadingAnchor.constraint(equalTo: lendeeView.trailingAnchor, constant: 25),
-                                     lendeeAddressView.heightAnchor.constraint(equalToConstant: viewH + 150),
-                                     lendeeAddressView.widthAnchor.constraint(equalToConstant: viewW),
-                                     
-                                     
-                                     lenderSignatureView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     lenderSignatureView.leadingAnchor.constraint(equalTo: lendeeAddressView.trailingAnchor, constant: 25),
-                                     lenderSignatureView.heightAnchor.constraint(equalToConstant: viewH - 135),
-                                     lenderSignatureView.widthAnchor.constraint(equalToConstant: viewW + 50),
-                                     
-                                     
-                                     lendeeSignatureView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     lendeeSignatureView.leadingAnchor.constraint(equalTo: lenderSignatureView.trailingAnchor, constant: 25),
-                                     lendeeSignatureView.heightAnchor.constraint(equalToConstant: viewH - 135),
-                                     lendeeSignatureView.widthAnchor.constraint(equalToConstant: viewW + 50),
-                                     
-                                     
-                                     saveButton.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                                     saveButton.leadingAnchor.constraint(equalTo: lendeeSignatureView.trailingAnchor, constant: 25),
-                                     saveButton.heightAnchor.constraint(equalToConstant: viewH),
-                                     saveButton.widthAnchor.constraint(equalToConstant: viewW),
         ])
     }
 }
+
+
+extension ContractCreationViewController: UICollectionViewDelegateFlowLayout {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return views.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContractCreationCell.cellId, for: indexPath) as! ContractCreationCell
+        cell.mainContentView = views[indexPath.row]
+        cell.vh = views[indexPath.row].bounds.height
+        cell.vw = views[indexPath.row].bounds.width
+        return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.bounds.height / 2)
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let x = targetContentOffset.pointee.x
+        pageControl.currentPage = Int(x / view.frame.width)
+    }
+    
+    
+}
+
