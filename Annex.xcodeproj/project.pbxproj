@@ -18,7 +18,6 @@
 		2B4D14AA21E52A4800C21358 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14A921E52A4800C21358 /* MainViewController.swift */; };
 		2B4D14AF21E52A4800C21358 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B4D14AE21E52A4800C21358 /* Assets.xcassets */; };
 		2B4D14B221E52A4800C21358 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4D14B021E52A4800C21358 /* LaunchScreen.storyboard */; };
-		2B4D14C021E5545100C21358 /* customFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14BF21E5545100C21358 /* customFlowLayout.swift */; };
 		2B4D14CA21E66B2F00C21358 /* ContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14C921E66B2F00C21358 /* ContractCell.swift */; };
 		2B4D14CC21E714ED00C21358 /* ContractCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14CB21E714ED00C21358 /* ContractCreationViewController.swift */; };
 		2B4D14D221E8309D00C21358 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14D121E8309D00C21358 /* Form.swift */; };
@@ -28,6 +27,8 @@
 		2B4D14E021ED19FA00C21358 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14DF21ED19FA00C21358 /* UIColorExtension.swift */; };
 		2B4D14E621F0F82B00C21358 /* CCViewBuilderxt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4D14E521F0F82B00C21358 /* CCViewBuilderxt.swift */; };
 		2BE13A5C2359C0DE0049FD43 /* ContractCreationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE13A5B2359C0DE0049FD43 /* ContractCreationCell.swift */; };
+		2BE13A5E2359DB6C0049FD43 /* customFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE13A5D2359DB6C0049FD43 /* customFlowLayout.swift */; };
+		2BE13A602359DEE80049FD43 /* ContractPreDisplayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE13A5F2359DEE80049FD43 /* ContractPreDisplayVC.swift */; };
 		C058C1E3AD10F3BF55229B10 /* Pods_Annex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6861BD14C50EE9AC22B5568 /* Pods_Annex.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +47,6 @@
 		2B4D14AE21E52A4800C21358 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B4D14B121E52A4800C21358 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B4D14B321E52A4800C21358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2B4D14BF21E5545100C21358 /* customFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customFlowLayout.swift; sourceTree = "<group>"; };
 		2B4D14C921E66B2F00C21358 /* ContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCell.swift; sourceTree = "<group>"; };
 		2B4D14CB21E714ED00C21358 /* ContractCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCreationViewController.swift; sourceTree = "<group>"; };
 		2B4D14D121E8309D00C21358 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
@@ -56,6 +56,8 @@
 		2B4D14DF21ED19FA00C21358 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		2B4D14E521F0F82B00C21358 /* CCViewBuilderxt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCViewBuilderxt.swift; sourceTree = "<group>"; };
 		2BE13A5B2359C0DE0049FD43 /* ContractCreationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractCreationCell.swift; sourceTree = "<group>"; };
+		2BE13A5D2359DB6C0049FD43 /* customFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customFlowLayout.swift; sourceTree = "<group>"; };
+		2BE13A5F2359DEE80049FD43 /* ContractPreDisplayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractPreDisplayVC.swift; sourceTree = "<group>"; };
 		D6861BD14C50EE9AC22B5568 /* Pods_Annex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Annex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F189BDA059275B4516679010 /* Pods-Annex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Annex.release.xcconfig"; path = "Pods/Target Support Files/Pods-Annex/Pods-Annex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +123,7 @@
 				2B4D14A921E52A4800C21358 /* MainViewController.swift */,
 				2B4D14D321E8587400C21358 /* ContractDisplayController.swift */,
 				2B4D14CB21E714ED00C21358 /* ContractCreationViewController.swift */,
+				2BE13A5F2359DEE80049FD43 /* ContractPreDisplayVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -141,8 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				2B1C8CB12358D40600E89B14 /* ContractCreationExts */,
-				2B4D14BF21E5545100C21358 /* customFlowLayout.swift */,
 				2B4D14DF21ED19FA00C21358 /* UIColorExtension.swift */,
+				2BE13A5D2359DB6C0049FD43 /* customFlowLayout.swift */,
 				2B1C8CA92356C55600E89B14 /* UILabelExt.swift */,
 				2B1C8CB22358D48800E89B14 /* UIVCExtension.swift */,
 				2B1C8CA72356C30800E89B14 /* MainVCExt.swift */,
@@ -300,15 +303,16 @@
 				2BE13A5C2359C0DE0049FD43 /* ContractCreationCell.swift in Sources */,
 				2B4D14CA21E66B2F00C21358 /* ContractCell.swift in Sources */,
 				2B4D14D421E8587400C21358 /* ContractDisplayController.swift in Sources */,
+				2BE13A602359DEE80049FD43 /* ContractPreDisplayVC.swift in Sources */,
 				2B0EE05A235962FD00B94BA3 /* CustomDatePicker.swift in Sources */,
 				2B4D14A821E52A4800C21358 /* AppDelegate.swift in Sources */,
 				2B1C8CB32358D48800E89B14 /* UIVCExtension.swift in Sources */,
+				2BE13A5E2359DB6C0049FD43 /* customFlowLayout.swift in Sources */,
 				2B4D14CC21E714ED00C21358 /* ContractCreationViewController.swift in Sources */,
 				2B4D14E021ED19FA00C21358 /* UIColorExtension.swift in Sources */,
 				2B4D14DA21EBB78900C21358 /* realmHelper.swift in Sources */,
 				2B4D14DE21ED134A00C21358 /* TutVC.swift in Sources */,
 				2B4D14E621F0F82B00C21358 /* CCViewBuilderxt.swift in Sources */,
-				2B4D14C021E5545100C21358 /* customFlowLayout.swift in Sources */,
 				2B4D14D221E8309D00C21358 /* Form.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

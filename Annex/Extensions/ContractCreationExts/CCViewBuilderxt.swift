@@ -35,20 +35,20 @@ extension ContractCreationViewController {
         
         lenderAddressView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH + 50))
         lenderAddressView.addLabel(text: "Lender's address")
-        lenderAddressView.addTextbox(placeHolderText: "555 Yellow Brick Rd", keyboardType: .default, 1)
-        lenderAddressView.addTextbox(placeHolderText: "Kansas City", keyboardType: .default, 2)
-        lenderAddressView.addTextbox(placeHolderText: "Kansas", keyboardType: .default, 3)
-        lenderAddressView.addTextbox(placeHolderText: "31658", keyboardType: .default, 4)
+        lenderAddressView.addTextbox(placeHolderText: "555 Yellow Brick Rd", keyboardType: .default, 1, 1.25)
+        lenderAddressView.addTextbox(placeHolderText: "Kansas City", keyboardType: .default, 2, 1.25)
+        lenderAddressView.addTextbox(placeHolderText: "Kansas", keyboardType: .default, 3, 1.25)
+        lenderAddressView.addTextbox(placeHolderText: "31658", keyboardType: .default, 4, 1.25)
         
         
         
         
         lendeeAddressView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH + 50))
         lendeeAddressView.addLabel(text: "Lendee's address")
-        lendeeAddressView.addTextbox(placeHolderText: "556 Yellow Brick Rd", keyboardType: .default, 1)
-        lendeeAddressView.addTextbox(placeHolderText: "Kansas City", keyboardType: .default, 2)
-        lendeeAddressView.addTextbox(placeHolderText: "Kansas", keyboardType: .default, 3)
-        lendeeAddressView.addTextbox(placeHolderText: "31658", keyboardType: .default, 4)
+        lendeeAddressView.addTextbox(placeHolderText: "556 Yellow Brick Rd", keyboardType: .default, 1, 1.25)
+        lendeeAddressView.addTextbox(placeHolderText: "Kansas City", keyboardType: .default, 2, 1.25)
+        lendeeAddressView.addTextbox(placeHolderText: "Kansas", keyboardType: .default, 3, 1.25)
+        lendeeAddressView.addTextbox(placeHolderText: "31658", keyboardType: .default, 4, 1.25)
         
         
         lendeeView = CustomView(frame: CGRect(x: 0, y: 0, width: viewW, height: viewH))
@@ -124,25 +124,6 @@ extension ContractCreationViewController {
             return button
         }()
         
-        saveButton = {
-            let button = UIButton()
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.setTitle("save", for: .normal)
-            button.setTitleColor(.black, for: .normal)
-            button.backgroundColor = .white
-            button.layer.borderColor = UIColor.init(hexString: "#919191").cgColor
-            button.layer.borderWidth = 1
-            button.layer.shadowColor = UIColor.black.cgColor
-            button.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
-            button.layer.masksToBounds = false
-            button.layer.shadowRadius = 5
-            button.layer.shadowOpacity = 0.5
-            button.layer.cornerRadius = 15
-            button.addTarget(self, action: #selector(saveButtontapCancelled), for: [.touchCancel, .touchDragExit, .touchUpOutside])
-            button.addTarget(self, action: #selector(saveButtontapUp), for: [.touchUpInside])
-            button.addTarget(self, action: #selector(saveButtontapDown), for: [.touchDown])
-            return button
-        }()
         
         views.append(lenderView)
         views.append(lenderAddressView)

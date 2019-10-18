@@ -47,7 +47,7 @@ class CustomView: UIView{
         stackView.addArrangedSubview(label)
     }
     
-    func addTextbox(placeHolderText: String, keyboardType: UIKeyboardType, _ tag: Int = 0, leftView: UIView = UIView()){
+    func addTextbox(placeHolderText: String, keyboardType: UIKeyboardType, _ tag: Int = 0,  _ size: Double = 2, leftView: UIView = UIView()){
         let textBox = UITextField()
         textBox.translatesAutoresizingMaskIntoConstraints = false
         textBox.keyboardType = keyboardType
@@ -62,7 +62,7 @@ class CustomView: UIView{
         textBox.tag = tag
         stackView.addArrangedSubview(textBox)
         NSLayoutConstraint.activate([
-            textBox.widthAnchor.constraint(equalToConstant: stackView!.bounds.width / 2)
+            textBox.widthAnchor.constraint(equalToConstant: stackView!.bounds.width / CGFloat(size))
         ])
     }
     func addDatePicker() {

@@ -21,9 +21,14 @@ extension ContractCreationViewController {
         nextButton.alpha = 1
 
         nextPage()
-        if pageControl.currentPage == 7 {
+        if nextButton.titleLabel!.text == "Done" {
+             save()
+         }
+        
+        if pageControl.currentPage == 6 {
             nextButton.setTitle("Done", for: .normal)
         }
+ 
     }
     
     private func nextPage() {
@@ -47,7 +52,7 @@ extension ContractCreationViewController {
         pageControl.currentPage = prevIndex
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         
-        if pageControl.currentPage < 7 {
+        if pageControl.currentPage < 6 {
             nextButton.setTitle("Next", for: .normal)
         }
         
@@ -61,8 +66,7 @@ extension ContractCreationViewController {
     }
     
     
-    @objc func saveButtontapUp(_ sender: AnyObject) -> Void{
-        backButton.alpha = 1
+     func save() -> Void{
         let form = Form()
         
         form.month = dueDateView.getMonth()
